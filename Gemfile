@@ -11,6 +11,8 @@ gem 'sinatra-activerecord'
 gem 'puma'
 gem 'tux'
 
+gem 'pg'
+
 # These gems are only installed when run as `bundle install --without production`
 group :development, :test do
   gem 'pry'
@@ -19,11 +21,11 @@ group :development, :test do
   # COMMENTING OUT SQULITE IMPORT, ADDING PG IMPORT FOR PRODUCTION 
   # gem 'sqlite3'
 
-  gem 'pg'
+  
 end
 
 # bundle install --without test --without development
 group :production do
   # use postgres in production, or move outside a group if your app uses postgres for development and production 
-  gem 'pg'
+
 end
