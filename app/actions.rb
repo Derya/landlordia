@@ -4,6 +4,7 @@ get '/' do
 end
 
 get '/landlord' do
+  @apartments = Apartment.first(16)
   erb :'landlord/index'
 end
 
