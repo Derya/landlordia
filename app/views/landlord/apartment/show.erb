@@ -10,16 +10,18 @@
       </tr>
       <tr>
         <td>Lease end</td>
-        <td><%=@apartment.lease_start%></td>
+        <td><%=@apartment.lease_end%></td>
       </tr>
       <tr>
         <td>Car spaces</td>
-        <td><%=@apartment.car_spaces.each do |car_space|
-          puts car_space %></td>
+        <td><% @apartment.car_spaces.each do |car_space| %>
+          <%=car_space.id.to_s %>
+          <% end%>
+          </td>
       </tr>
       <tr>
         <td>Rent amount</td>
-        <td><%=@apartment.rents.amount.last %></td>
+        <td><%=@apartment.rents.last.amount %></td>
       </tr>
       <tr>
         <td>Current tenant name</td>
