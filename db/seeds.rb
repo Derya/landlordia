@@ -37,7 +37,7 @@ NUM_APTS.times do
   loop do
     # move out old tenant (unless this is first iteration in loop)
     if ten
-      ten.active?
+      ten.active = false
       ten.save
     end
 
@@ -54,7 +54,7 @@ NUM_APTS.times do
     ten.phone_number = Faker::PhoneNumber.phone_number
     ten.email = Faker::Internet.email
     # make them active for now
-    ten.active
+    ten.active = true
     # associate with apartment
     apt.tenants << ten
 
@@ -99,7 +99,7 @@ NUM_APTS.times do
         #add misc data
         note.content = Faker::Lorem.sentence(10)
         note.type = ["service request","notification"].sample
-        note.outstanding? = [true,false].sample
+        note.outstanding = [true,false].sample
         apt.notes << note
         ten.notes << note
       end
