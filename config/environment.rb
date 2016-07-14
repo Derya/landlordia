@@ -26,22 +26,36 @@ end
 configure :development, :test do
   require 'pry'
 
-  db = URI.parse(ENV['DATABASE_URL'] || 'postgres:///localhost/mydb')
+  # db = URI.parse(ENV['DATABASE_URL'] || 'postgres:///localhost/mydb')
 
-  ActiveRecord::Base.establish_connection(
-  :adapter  => db.scheme == 'postgres' ? 'postgresql' : db.scheme,
-  :host     => db.host,
-  :username => db.user,
-  :password => db.password,
-  :database => db.path[1..-1],
-  :encoding => 'utf8'
-  )
+  # ActiveRecord::Base.establish_connection(
+  # :adapter  => db.scheme == 'postgres' ? 'postgresql' : db.scheme,
+  # :host     => db.host,
+  # :username => db.user,
+  # :password => db.password,
+  # :database => db.path[1..-1],
+  # :encoding => 'utf8'
+  # )
+
  
 end
 
 # Production Sinatra Configuration
 configure :production do
   # NOOP
+
+
+  # db = URI.parse(ENV['DATABASE_URL'] || 'postgres:///localhost/mydb')
+
+  # ActiveRecord::Base.establish_connection(
+  # :adapter  => db.scheme == 'postgres' ? 'postgresql' : db.scheme,
+  # :host     => db.host,
+  # :username => db.user,
+  # :password => db.password,
+  # :database => db.path[1..-1],
+  # :encoding => 'utf8'
+  # )
+  
 end
 
 # Set up the database and models
