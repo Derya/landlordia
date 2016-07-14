@@ -1,0 +1,83 @@
+<main class="description">
+  <div class="description-container">
+    <header>
+      <h1>Apartment <%=@apartment.apartment_number%></h1>
+    </header>
+    <table>
+      <tr>
+        <td>Lease start</td>
+        <td><%=@apartment.lease_start%></td>
+      </tr>
+      <tr>
+        <td>Lease end</td>
+        <td><%=@apartment.lease_start%></td>
+      </tr>
+      <tr>
+        <td>Car spaces</td>
+        <td><%=@apartment.car_spaces.each do |car_space|
+          puts car_space %></td>
+      </tr>
+      <tr>
+        <td>Rent amount</td>
+        <td><%=@apartment.rents.amount.last %></td>
+      </tr>
+      <tr>
+        <td>Current tenant name</td>
+        <td><%=@apartment.tenants.where(active: true).name%></td>
+      </tr>
+      <tr>
+        <td>Notes</td>
+        <td><a href='/landlord/apartment/<%= @apartment.id %>/notes'>See all notes</a></td>
+      </tr>
+      <tr>
+        <td>Tenants</td>
+        <td><a href='/landlord/apartment/<%= @apartment.id %>/tenants'>See all tenants</a></td>
+      </tr>
+      <tr>
+        <td>Rents</td>
+        <td><a href='/landlord/apartment/<%= @apartment.id %>/rents'>See all rents</a></td>
+      </tr>
+    </table>
+  </div>
+</main>
+
+<div id="alerts">
+
+  <header>
+    <h1>Alerts</h1>
+  </header>
+
+  <section class="overdue">
+    <header>
+      <h2 class="alerts-title">Overdue rent</h2>
+    </header>
+    <main class="alerts-body">
+      <ul class="alerts-list">
+        <!--populate the list with query on overdue rent -->
+      </ul>
+    </main>
+  </section>
+
+  <section class="outstanding">
+    <header>
+      <h2 class="alerts-title">Outstanding service requests</h2>
+    </header>
+    <main class="alerts-body">
+      <ul class="alerts-list">
+        <!--populate the list with query on service requests -->
+      </ul>
+    </main>
+  </section>
+
+  <section class="lease-ending">
+    <header>
+      <h2 class="alerts-title">Lease ending soon</h2>
+    </header>
+    <main class="alerts-body">
+      <ul class="alerts-list">
+        <!--populate the list with query on lease ending soon -->
+      </ul>
+    </main>
+  </section>
+
+</div>
