@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160714162643) do
+ActiveRecord::Schema.define(version: 20160714224046) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20160714162643) do
   create_table "notes", force: :cascade do |t|
     t.text     "content"
     t.string   "type"
-    t.boolean  "outstanding?"
+    t.boolean  "outstanding"
     t.integer  "apartment_id"
     t.integer  "tenant_id"
     t.datetime "created_at"
@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 20160714162643) do
     t.string   "name"
     t.string   "email"
     t.string   "phone_number"
-    t.boolean  "active?"
+    t.boolean  "active"
     t.integer  "apartment_id"
     t.datetime "created_at"
     t.datetime "updated_at"
