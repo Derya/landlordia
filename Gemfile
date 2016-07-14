@@ -15,7 +15,11 @@ gem 'tux'
 group :development, :test do
   gem 'pry'
   gem 'shotgun'
-  gem 'sqlite3'
+  
+  # COMMENTING OUT SQULITE IMPORT, ADDING PG IMPORT FOR PRODUCTION 
+  # gem 'sqlite3'
+
+  gem 'pg'
 end
 
 # bundle install --without test --without development

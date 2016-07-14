@@ -6,12 +6,18 @@ end
 configure :development, :test do
   set :database, {
     'development' => {
-      'adapter' => 'sqlite3',
-      'database' => APP_ROOT.join('db', 'development.sqlite3')
+      adapter: 'postgresql',
+      host: 'localhost',
+      username: 'development',
+      password: 'development',
+      database: 'landlordia'
     },
     'test' => {
-      'adapter' => 'sqlite3',
-      'database' => APP_ROOT.join('db', 'test.sqlite3')
+      adapter: 'postgresql',
+      host: 'localhost',
+      username: 'development',
+      password: 'development',
+      database: 'landlordia'
     }
   }
 end
