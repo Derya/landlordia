@@ -33,13 +33,15 @@ NUM_APTS.times do
   # start simulating our history
   time = DATE_START
 
+  # this tenant doesn't get used, pay no mind
+  ten = Tenant.new
+
   # loop over time
   loop do
-    # move out old tenant (unless this is first iteration in loop)
-    if ten
-      ten.active = false
-      ten.save
-    end
+    # move out old tenant
+    ten.active = false
+    ten.save
+
 
     # vacancy period of time
     time += get_random_period_of_time
@@ -73,7 +75,8 @@ NUM_APTS.times do
     rental_start = time
     # we dont want to make rent payment entries in the future, so we only count 
     # rental period before the future
-    rental_end = (rental_end > END_DATE) ? END_DATE : time + lease_duration
+    rental_end = time + lease_duration
+    rental_end = END_DATE if rental_end > END_DATE
 
     # we are now going to move forward month by month
     while time < rental_end.beginning_of_month do
@@ -93,7 +96,7 @@ NUM_APTS.times do
 
       # make 1d4-1 random notes
 
-      [0,1,2,3].times do
+      [0,1,2,3].sample.times do
         # make a random note from this month
         note = Note.new
         #add misc data
@@ -122,9 +125,9 @@ end
 
 # assign the parking spots
 NUM_PARKING_LOTS.times do
-  lot = ParkingLot.new
+  lot = CarSpace.new
   # just assign it randomly HAHAHAHA
-  Apartment.all.sample.parking_lots << lot
+  Apartment.all.sample.car_spaces << lot
   lot.save
 end
 
