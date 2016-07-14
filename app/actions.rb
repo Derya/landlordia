@@ -31,15 +31,18 @@ post 'landlord/apartment/:id' do
   @carspace.update(apartment_id: params[:id])
 end
 
-get 'landlord/apartment/id/notes' do
+get 'landlord/apartment/:id/notes' do
+  @notes = Apartment.where(id: params[:id]).notes
   erb :'landlord/apartment/notes'
 end
 
-get 'landlord/apartment/id/tenants' do
+get 'landlord/apartment/:id/tenants' do
+  @tenants = Apartment.where(id: params[:id]).tenants
   erb :'landlord/apartment/tenants'
 end
 
-get 'landlord/apartment/id/rent' do
+get 'landlord/apartment/:id/rents' do
+  @rents = Apartment.where(id: params[:id]).rents
   erb :'landlord/apartment/rent'
 end
 
