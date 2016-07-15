@@ -6,12 +6,23 @@
       </tr>
     </thead>
     <tbody>
-      <% @tenants.each do |tenant|%>
+        <tr>
+          <td>Name</td>
+          <td>Email</td>
+          <td>Phone number </td>
+          <td>Status</td>
+        </tr>
+      <% @ordered_tenants = @tenants.order(active: :desc) %>
+      <% @ordered_tenants.each do |tenant|%>
         <tr>
           <td><%= tenant.name %></td>
           <td><%= tenant.email %></td>
           <td><%= tenant.phone_number %></td>
-          <td><%= tenant.active %></td>
+          <td><% if tenant.active%>
+              Active
+            <% else %>
+              Not Active
+            <% end %></td>
         </tr>
       <%end%>
     </tbody>

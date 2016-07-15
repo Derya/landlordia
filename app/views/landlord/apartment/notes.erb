@@ -6,11 +6,22 @@
       </tr>
     </thead>
     <tbody>
-      <% @notes.each do |note|%>
-        <tr>
-          <td><%= note.note_type %></td>
-          <td><%= note.content %></td>
-        </tr>
+      <tr>
+        <td>Type</td>
+        <td>Note</td>
+        <td>Status</td>
+      </tr>
+      <% @ordered_notes = @notes.order(outstanding: :desc) %>
+      <% @ordered_notes.each do |note|%>
+      <tr> 
+        <td><%= note.note_type %></td>
+        <td><%= note.content %></td>
+        <td><% if note.outstanding%>
+          Outstanding
+        <% else %>
+          Not outstanding
+          <% end %></td>
+      </tr>
       <%end%>
     </tbody>
   </table>
