@@ -1,4 +1,8 @@
-  @import url ('https://fonts.googleapis.com/css?family=Lobster|Righteous')
+  @import 'https://fonts.googleapis.com/css?family=Lobster';
+  @import 'https://fonts.googleapis.com/css?family=Righteous';
+
+  $lobster: Lobster;
+  $righteous: Righteous;
 
   $color-blue-dark: #1B3957;
   $color-blue-mid: #2B4A69;
@@ -11,10 +15,10 @@
   }
 
   .navbar-brand {
-    font-family: Righteous;
+    font-family: $righteous;
     font-size: 120%;
   }
   .branded-letter{
-    font-family: Lobster;
+    font-family: $lobster;
     font-size: 250%;
   }

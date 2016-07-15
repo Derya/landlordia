@@ -8,8 +8,8 @@
   -->
   <link rel="stylesheet" href="/stylesheets/normalize.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.1.0/css/bulma.css">
-  <link rel="stylesheet" type="text/css" href="style.scss">
-  <link rel="stylesheet" type="text/css" href="normalize.css">
+  <link rel="stylesheet" type="text/css" href="public/stylesheets/style.scss">
+  <link rel="stylesheet" type="text/css" href="public/stylesheets/normalize.css">
   <!--
     application.css is where you put your styles
   -->
@@ -24,6 +24,11 @@
 
   <% if request.path_info != '/'%>
     <%= erb :_navbar%>
+  <% end %>
+
+  <% if session[:flash] %>
+    <div class="alert alert-success" role="alert"><%= session[:flash] %></div>
+    <% session.delete(:flash) %>
   <% end %>
 
   <%= yield %>
