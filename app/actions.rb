@@ -21,12 +21,13 @@ post '/landlord/apartment/:id' do
   # This should get the params[:id] from the url?
   @carspace = CarSpace.find params[:carspace.id]
   # This is checking if the carspace apartment_id is different to the one you're trying to change it to but it's not empty.
+
   # If it's different, give a flash to say that it's being overwritten
-  if @carspace.apartment_id != (params[:id] && nil)
-    session[:flash] = "Carspace has been overwritten"
+  unless @carspace.apartment_id.nil?
+    session[:flash] = "Carspace #{@carspace.id} has been moved to this apartment"
   else
     # Otherwise just let them know it has been changed (this would be if it's empty of the same as the one you're trying to change it to, which would be stupid but ya know, people can be stupid)
-    session[:flash] = "Carspace has been changed"
+    session[:flash] = "Carspace #{@carspace.id} has been assigned to this apartment"
   end
   @carspace.update(apartment_id: params[:id])
 end
@@ -46,7 +47,7 @@ end
 get '/landlord/apartment/:id/rents' do
   @apartment = Apartment.find(params[:id])
   @rents = @apartment.rents
-  erb :'landlord/apartment/rent'
+  erb :'landlord/apartment/rents'
 end
 
 get '/tenant/note/new' do
@@ -60,6 +61,5 @@ post '/tenant/note' do
     note_type: params[:type],
     outstanding: true,
     )
-  binding.pry
   redirect '/'
 end
