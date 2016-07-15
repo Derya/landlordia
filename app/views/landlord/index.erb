@@ -1,7 +1,7 @@
 <main class="overview">
   <div class="overview-container">
     <%@apartments.each do |apartment|%>
-      <span> <%=apartment.apartment_number %> </span>
+      <span> <a href='/landlord/apartment/<%= apartment.id%>'><%=apartment.apartment_number %> </a></span>
     <% end %>
   </div>
 </main>
