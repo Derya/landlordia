@@ -60,5 +60,6 @@ post '/tenant/note' do
     note_type: params[:type],
     outstanding: true,
     )
+  binding.pry
   redirect '/'
 end
