@@ -11,12 +11,11 @@ require 'faker'
 NUM_APTS = 16
 DATE_START = 2.years.ago
 END_DATE = Time.now
-NUM_PARKING_LOTS = 10
+NUM_PARKING_LOTS = 20
 
 # helper to get a random duration (not a date)
 def get_random_period_of_time
-  1.months
-  #((0..26).to_a).sample.days + ((0..2).to_a).sample.months
+  ((0..26).to_a).sample.days + ((0..2).to_a).sample.months
 end
 
 def get_random_rent
@@ -128,13 +127,12 @@ NUM_APTS.times do
 
 end
 
-# assign the parking spots
-# NUM_PARKING_LOTS.times do
-#   lot = CarSpace.new
-#   # just assign it randomly HAHAHAHA
-#   Apartment.all.sample.car_spaces << lot
-#   lot.save
-# end
+
+NUM_PARKING_LOTS.times do
+  lot = CarSpace.new
+  lot.apartment = Apartment.all.sample
+  lot.save
+end
 
 
 
