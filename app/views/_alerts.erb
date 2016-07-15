@@ -1,0 +1,45 @@
+<header>
+    <h1>Alerts</h1>
+  </header>
+
+  <section class="overdue">
+    <header>
+      <h2 class="alerts-title">Overdue rent</h2>
+    </header>
+    <main class="alerts-body">
+      <ul class="alerts-list">
+        <% overdues = Apartment.joins(:rents).where(rents: { pay_status: 'not paid'}) %>
+        <% overdues.uniq.each do |overdue| %>
+        <li><%= overdue.apartment_number %> </li>
+        <% end %>
+        <!--populate the list with query on overdue rent -->
+      </ul>
+    </main>
+  </section>
+
+  <section class="outstanding">
+    <header>
+      <h2 class="alerts-title">Outstanding service requests</h2>
+    </header>
+    <main class="alerts-body">
+      <ul class="alerts-list">
+      <% outstanding = Apartment.joins(:notes).where(notes: { outstanding: true}) %>
+        <% outstanding.uniq.each do |outstanding| %>
+        <li><%= outstanding.apartment_number %> </li>
+        <% end %>
+        <!--populate the list with query on service requests -->
+      </ul>
+    </main>
+  </section>
+
+  <section class="lease-ending">
+    <header>
+      <h2 class="alerts-title">Lease ending soon</h2>
+    </header>
+    <main class="alerts-body">
+      <ul class="alerts-list">
+      <% Apartment.where(lease_end: between?(Date.today, Date.today + 2.months)%>
+        <!--populate the list with query on lease ending soon -->
+      </ul>
+    </main>
+  </section>
