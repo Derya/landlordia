@@ -32,17 +32,20 @@ post '/landlord/apartment/:id' do
 end
 
 get '/landlord/apartment/:id/notes' do
-  @notes = Apartment.where(id: params[:id]).notes
+  @apartment = Apartment.find(params[:id])
+  @notes = @apartment.notes
   erb :'landlord/apartment/notes'
 end
 
 get '/landlord/apartment/:id/tenants' do
-  @tenants = Apartment.where(id: params[:id]).tenants
+  @apartment = Apartment.find(params[:id])
+  @tenants = @apartment.tenants
   erb :'landlord/apartment/tenants'
 end
 
 get '/landlord/apartment/:id/rents' do
-  @rents = Apartment.where(id: params[:id]).rents
+  @apartment = Apartment.find(params[:id])
+  @rents = @apartment.rents
   erb :'landlord/apartment/rent'
 end
 
@@ -54,7 +57,7 @@ post '/tenant/note' do
   @apartment = Apartment.find_by(apartment_number: params[:apartment_number])
   @apartment.notes.create(
     content: params[:content],
-    type: params[:type],
+    note_type: params[:type],
     outstanding: true,
     )
   redirect '/'
