@@ -1,0 +1,17 @@
+<main class="description">
+  <table>
+    <thead>
+      <tr>
+        <th colspan="2">Apartment &num; <%= @apartment.apartment_number %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @tenants.each do |tenant|%>
+        <tr>
+          <td><%= tenant.type %></td>
+          <td><%= tenant.content %></td>
+        </tr>
+      <%end%>
+    </tbody>
+  </table>
+</main>
