@@ -39,6 +39,7 @@ NUM_APTS.times do
 
   # this tenant doesn't get used, hopefully
   @tenant = Tenant.new
+  @tenant.name = "baourghaough"
 
   # vacancy period of time
   time += get_random_period_of_time
@@ -48,7 +49,7 @@ NUM_APTS.times do
 
     # move out old tenant
     @tenant.active = false
-    @tenant.save unless @tenant.persisted? # avoid tenant made outside loop
+    @tenant.save unless @tenant.name == "baourghaough" # avoid tenant made outside loop
 
     # make a new tenant
     @tenant = Tenant.new
