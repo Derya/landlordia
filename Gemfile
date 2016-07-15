@@ -14,6 +14,8 @@ gem 'tux'
 
 gem 'pg'
 
+gem 'sass'
+
 # These gems are only installed when run as `bundle install --without production`
 group :development, :test do
   gem 'pry'
