@@ -29,7 +29,7 @@
 
   <section class="outstanding">
     <header>
-      <h2 class="alerts-title">Outstanding service requests</h2>
+      <h2 class="alerts-title">Outstanding notes</h2>
     </header>
     <main class="alerts-body">
       <ul class="alerts-list">
@@ -41,7 +41,7 @@
         <% end %>
         <% if mode == "apartment" %>
           <% @apartment.notes.where(outstanding: true).each do |outstanding| %>
-            <li><%= outstanding.content %> </li>
+            <li><%=outstanding.note_type%> - <%= outstanding.content %> </li>
           <% end %>
         <% end %>
         <!--populate the list with query on service requests -->
