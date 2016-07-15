@@ -63,3 +63,11 @@ post '/tenant/note' do
     )
   redirect '/'
 end
+
+post '/landlord/notes/:id' do
+  @note = Note.find(params[:id])
+  @note.outstanding = false
+  @note.save
+  @apartment = Apartment.find(params[:apartment_id])
+  redirect "/landlord/apartment/#{@apartment.id}/notes"
+end
