@@ -53,9 +53,9 @@ NUM_APTS.times do
     @ten.phone_number = Faker::PhoneNumber.phone_number
     @ten.email = Faker::Internet.email
     # make them active for now
-    ten.active = true
+    @ten.active = true
     # associate with apartment
-    apt.tenants << ten
+    apt.tenants << @ten
 
     # simulate this lease happening
 
@@ -88,7 +88,7 @@ NUM_APTS.times do
       #TODO: randomize this:
       rent.pay_status = "paid"
       apt.rents << rent
-      ten.rents << rent
+      @ten.rents << rent
       rent.save
 
       # make 1d4-1 random notes
