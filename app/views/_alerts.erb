@@ -38,7 +38,9 @@
     </header>
     <main class="alerts-body">
       <ul class="alerts-list">
-      <% Apartment.where(lease_end: between?(Date.today, Date.today + 2.months)%>
+      <% Apartment.where(lease_end: (Date.today)..(2.months.since)).each do |apartment|%>
+      <li><%=apartment.apartment_number%></li>
+      <% end %>
         <!--populate the list with query on lease ending soon -->
       </ul>
     </main>

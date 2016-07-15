@@ -29,4 +29,8 @@ class Apartment < ActiveRecord::Base
     errors.add(:base,"can have at most 1 active tenant") if self.tenants.where(active: true).count > 1
   end
 
+  def self.ending_soon?
+    lease_end.between?(Date.today, 2.months.since)
+  end
+
 end
