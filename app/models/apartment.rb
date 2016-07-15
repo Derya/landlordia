@@ -7,6 +7,14 @@ class Apartment < ActiveRecord::Base
   validate :lease_times
   validate :at_most_one_tenant_active
 
+  def tenant_name
+    if self.tenant
+      self.tenant.name
+    else
+      "unoccupied"
+    end
+  end
+
   def tenant
     self.tenants.find_by(active: true)
   end
@@ -14,7 +22,7 @@ class Apartment < ActiveRecord::Base
   private
 
   def lease_times
-    errors.add(:base,"lease start must be before lease end") if lease_start > lease_end
+    errors.add(:base,"lease start must be before lease end") if lease_start && lease_end && lease_start > lease_end
   end
 
   def at_most_one_tenant_active

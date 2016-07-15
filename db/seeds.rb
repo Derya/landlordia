@@ -34,27 +34,24 @@ NUM_APTS.times do
   time = DATE_START
 
   # this tenant doesn't get used, pay no mind
-  ten = Tenant.new
+  @ten = Tenant.new
+
+  # vacancy period of time
+  time += get_random_period_of_time
 
   # loop over time
-  loop do
+  while time > END_DATE do
+
     # move out old tenant
-    ten.active = false
-    ten.save
-
-
-    # vacancy period of time
-    time += get_random_period_of_time
-
-    # we are done loop if time has passed end date
-    break if time > END_DATE
+    @ten.active = false
+    @ten.save if @ten.persisted?
 
     # make a new tenant
-    ten = Tenant.new
+    @ten = Tenant.new
     # give them some info
-    ten.name = Faker::Name.name_with_middle
-    ten.phone_number = Faker::PhoneNumber.phone_number
-    ten.email = Faker::Internet.email
+    @ten.name = Faker::Name.name_with_middle
+    @ten.phone_number = Faker::PhoneNumber.phone_number
+    @ten.email = Faker::Internet.email
     # make them active for now
     ten.active = true
     # associate with apartment
@@ -116,6 +113,9 @@ NUM_APTS.times do
     # save the tenant
     ten.save
 
+    # vacancy period of time
+    time += get_random_period_of_time
+
   end
 
   # save apartment
@@ -124,12 +124,12 @@ NUM_APTS.times do
 end
 
 # assign the parking spots
-NUM_PARKING_LOTS.times do
-  lot = CarSpace.new
-  # just assign it randomly HAHAHAHA
-  Apartment.all.sample.car_spaces << lot
-  lot.save
-end
+# NUM_PARKING_LOTS.times do
+#   lot = CarSpace.new
+#   # just assign it randomly HAHAHAHA
+#   Apartment.all.sample.car_spaces << lot
+#   lot.save
+# end
 
 
 
