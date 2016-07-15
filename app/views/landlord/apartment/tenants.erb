@@ -2,14 +2,16 @@
   <table>
     <thead>
       <tr>
-        <th colspan="2">Apartment &num; <%= @apartment.apartment_number %></th>
+        <th colspan="4">Apartment &num; <%= @apartment.apartment_number %></th>
       </tr>
     </thead>
     <tbody>
       <% @tenants.each do |tenant|%>
         <tr>
-          <td><%= tenant.type %></td>
-          <td><%= tenant.content %></td>
+          <td><%= tenant.name %></td>
+          <td><%= tenant.email %></td>
+          <td><%= rent.phone_number %></td>
+          <td><%= rent.active %></td>
         </tr>
       <%end%>
     </tbody>
