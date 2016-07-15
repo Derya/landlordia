@@ -9,18 +9,22 @@ require 'faker'
 
 # constants
 NUM_APTS = 16
+NUM_PARKING_LOTS = 20
 DATE_START = 2.years.ago
 END_DATE = Time.now
-NUM_PARKING_LOTS = 20
+NOTES_BACK = 5
 
 # helper to get a random duration (not a date)
 def get_random_period_of_time
-  ((0..26).to_a).sample.days + ((0..2).to_a).sample.months
+  ((0..28).to_a).sample.days + ((0..2).to_a).sample.months
 end
 
 def get_random_rent
-  #TODO: randomize this
-  9_999.99
+  [1800,2000,1300,1950,1975].sample
+end
+
+def rents_to_unpay
+  [0,0,0,0,1,2].sample
 end
 
 NUM_APTS.times do
@@ -34,7 +38,7 @@ NUM_APTS.times do
   time = DATE_START
 
   # this tenant doesn't get used, hopefully
-  @tenant = Tenant.new(name: "sdfgvfghnbvcfghgvfghnb")
+  @tenant = Tenant.new
 
   # vacancy period of time
   time += get_random_period_of_time
@@ -44,7 +48,7 @@ NUM_APTS.times do
 
     # move out old tenant
     @tenant.active = false
-    @tenant.save unless @tenant.name == "sdfgvfghnbvcfghgvfghnb"
+    @tenant.save unless @tenant.persisted? # avoid tenant made outside loop
 
     # make a new tenant
     @tenant = Tenant.new
@@ -93,29 +97,40 @@ NUM_APTS.times do
       rent.save
 
       # make 1d4-1 random notes
-
       [0,1,2,3].sample.times do
         # make a random note from this month
         note = Note.new
         #add misc data
         note.content = Faker::Lorem.sentence(10)
         note.note_type = ["service request","notification"].sample
-        note.outstanding = [true,false,false,false,false].sample
+        note.outstanding = false
         note.apartment_id = @apt.id
         note.tenant_id = @tenant.id
         note.save
+        note.created_at = time
+        note.save
       end
 
-      # are these even necessary?
-      #@apt.save
-      #@tenant.save
+    end
 
+    # go back and unpay some rents
+    @tenant.rents.last(rents_to_unpay).each do |rent|
+      rent.pay_status = "not paid"
+      rent.save
+    end
+
+    # go back and make some service requests outstanding
+    index = 0
+    @tenant.notes.last(NOTES_BACK).each do |note|
+      index += 1
+      if (rand(index+6) == 0)
+        note.outstanding = true
+        note.save
+      end
     end
 
     # save the tenant
     @tenant.save
-
-
 
     # vacancy period of time
     time += get_random_period_of_time
