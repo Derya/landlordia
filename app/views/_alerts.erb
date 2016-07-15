@@ -7,13 +7,23 @@
       <h2 class="alerts-title">Overdue rent</h2>
     </header>
     <main class="alerts-body">
-      <ul class="alerts-list">
-        <% overdues = Apartment.joins(:rents).where(rents: { pay_status: 'not paid'}) %>
-        <% overdues.uniq.each do |overdue| %>
-        <li><%= overdue.apartment_number %> </li>
+      <% if mode == "all" %>
+        <ul class="alerts-list">
+          <% overdues = Apartment.joins(:rents).where(rents: { pay_status: 'not paid'}) %>
+          <% overdues.uniq.each do |overdue| %>
+            <li><%= overdue.apartment_number %> </li>
+          <% end %>
+          <!--populate the list with query on overdue rent -->
+        </ul>
+      <% end %>
+      <% if mode == "apartment" %>
+        <% if @apartment.rents.find_by(pay_status: 'not paid') %>
+          Yes
+        <% else %>
+          No 
         <% end %>
-        <!--populate the list with query on overdue rent -->
-      </ul>
+      <% end %>
+
     </main>
   </section>
 
@@ -23,9 +33,16 @@
     </header>
     <main class="alerts-body">
       <ul class="alerts-list">
-      <% outstanding = Apartment.joins(:notes).where(notes: { outstanding: true}) %>
-        <% outstanding.uniq.each do |outstanding| %>
-        <li><%= outstanding.apartment_number %> </li>
+        <% if mode == "all"%>
+          <% outstanding = Apartment.joins(:notes).where(notes: { outstanding: true}) %>
+          <% outstanding.uniq.each do |outstanding| %>
+            <li><%= outstanding.apartment_number %> </li>
+          <% end %>
+        <% end %>
+        <% if mode == "apartment" %>
+          <% @apartment.notes.where(outstanding: true).each do |outstanding| %>
+            <li><%= outstanding.content %> </li>
+          <% end %>
         <% end %>
         <!--populate the list with query on service requests -->
       </ul>
@@ -37,11 +54,20 @@
       <h2 class="alerts-title">Lease ending soon</h2>
     </header>
     <main class="alerts-body">
-      <ul class="alerts-list">
-      <% Apartment.where(lease_end: (Date.today)..(2.months.since)).each do |apartment|%>
-      <li><%=apartment.apartment_number%></li>
+      <% if mode == "all" %>
+        <ul class="alerts-list">
+        <% Apartment.where(lease_end: (Date.today)..(2.months.since)).each do |apartment|%>
+          <li><%=apartment.apartment_number%></li>
+        <% end %>
       <% end %>
-        <!--populate the list with query on lease ending soon -->
-      </ul>
+          <!--populate the list with query on lease ending soon -->
+        </ul>
+        <% if mode == "apartment" %>
+          <% if @apartment.lease_end.between?(Date.today, 2.months.since) %>
+            Yes
+          <% else %>
+            No
+          <% end %>
+        <% end %>  
     </main>
   </section>
