@@ -201,18 +201,13 @@ post '/landlord/apartment/:id/delete_upcoming_tenant' do
 end
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+post '/landlord/notes/:id' do
+  @note = Note.find(params[:id])
+  @note.outstanding = false
+  @note.save
+  @apartment = Apartment.find(params[:apartment_id])
+  redirect "/landlord/apartment/#{@apartment.id}/notes"
+end
 
 
 

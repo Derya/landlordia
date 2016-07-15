@@ -10,6 +10,7 @@
         <td>Type</td>
         <td>Note</td>
         <td>Status</td>
+        <td>Update</td>
         <td>Date raised</td>
       </tr>
       <% @ordered_notes = @notes.order(outstanding: :desc) %>
@@ -22,6 +23,13 @@
         <% else %>
           Not outstanding
           <% end %></td>
+        <td><% if note.outstanding%>
+          <form method="post" action="/landlord/notes/<%=note.id%>">
+          <input type="hidden" name="apartment_id" value="<%= note.apartment_id %>">
+          <button>Close</button>
+          </form>
+          <% end %>
+        </td>
         <td><%= note.created_at.strftime("%e %B %Y") %></td>
       </tr>
       <%end%>
