@@ -108,7 +108,10 @@ end
 post '/landlord/apartment/:id/new_tenant' do
   apartment_to = Apartment.find(params[:id])
   if apartment_to
-    new_ten = Tenant.new(name: params[:tenant_name], email: params[:tenant_email], phone_number: params[:tenant_phone], apartment_id: apartment_to.id, active: "upcoming")
+    new_ten = Tenant.new(name: params[:tenant_name], email: params[:tenant_email], phone_number: params[:tenant_phone], apartment_id: apartment_to.id)
+    new_ten.active = (apartment_to.tenant && params[:lease_start] > Time.now) ? "Upcoming" : "Active"
+    apartment_to.lease_start = params[:lease_start]
+    apartment_to.lease_end = params[:lease_end]
     if new_ten.validate && apartment_to.validate
       # TODO this feels dangerous
       new_ten.save
@@ -149,7 +152,7 @@ post '/landlord/apartment/:id/update_rent' do
 end
 
 post '/landlord/apartment/:id/update_lease' do
-    apartment_to = Apartment.find(params[:id])
+  apartment_to = Apartment.find(params[:id])
   if apartment_to
 
     apartment_to.lease_start = params[:lease_start]
@@ -174,7 +177,28 @@ post '/landlord/apartment/:id/update_lease' do
 end
 
 
+post '/landlord/apartment/:id/delete_upcoming_tenant' do
 
+  apartment_to = Apartment.find(params[:id])
+
+  if apartment_to
+
+    ten_del = apartment_to.upcoming_tenant
+
+    if ten_del && ten_del.destroy
+      session[:flash] = "deleted #{ten_del.name if ten_del.name}"
+    else
+      session[:flash] = "couldn't delete upcoming tenant for apartment #{params[:id]}"
+    end
+
+    redirect '/landlord/apartment/' + params[:id].to_s
+  else
+    session[:flash] = "couldn't find apartment #{params[:id]}"
+
+    redirect '/landlord/'
+  end
+
+end
 
 
 

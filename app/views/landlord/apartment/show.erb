@@ -3,7 +3,7 @@
 <main class="description">
   <div class="description-container">
     <header>
-      <h2 id="allow-editing-switch" style="color:red">Allow editing</h2>
+      <h2 id="allow-editing-switch" style="color:red;cursor:pointer;display:inline;">Allow editing</h2>
       <!-- consider how this should look, later. for example it could be a button, but that may not be necessary.
             it is possible to make the cursor hover over it be the "button" mode without making the element a button
             by doing css for cursor hover pointer, and to just style the text to look different -->
@@ -69,7 +69,7 @@
             </form>
         </td>
       </tr>
-      <tr>
+      <tr> <!-- ROW FOR CURRENT TENANT (DISPLAYS WITH "UNOCCUPIED" IF THERE IS NONE) -->
         <td>Current tenant name</td>
         <td class="show-col"><%=@apartment.tenant_name%></td>
         <td class="edit-col">
@@ -90,6 +90,18 @@
           </form>
         </td>
       </tr>
+      <% if @apartment.upcoming_tenant %> <!-- ROW FOR UPCOMING TENANT (DOES *NOT* DISPLAY IF THERE IS NONE) -->
+        <tr>
+          <td>Upcoming tenant</td>
+          <td class="show-col"><%=@apartment.upcoming_tenant.name%></td>
+          <td class="edit-col">
+            <%=@apartment.upcoming_tenant.name%>
+            <form method="post" action="/landlord/apartment/<%= @apartment.id %>/delete_upcoming_tenant" style="display:inline"><!-- TODO: MOVE DISPLAY TO CSS -->
+              <button type="submit">Delete</button>
+            </form>
+          </td>
+        </tr>
+      <% end %>
       <tr>
         <td>Notes and service requests</td>
         <td><a href='/landlord/apartment/<%= @apartment.id %>/notes'>See all notes</a></td>
