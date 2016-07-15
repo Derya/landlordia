@@ -46,7 +46,7 @@ end
 get '/landlord/apartment/:id/rents' do
   @apartment = Apartment.find(params[:id])
   @rents = @apartment.rents
-  erb :'landlord/apartment/rent'
+  erb :'landlord/apartment/rents'
 end
 
 get '/tenant/note/new' do
