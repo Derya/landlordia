@@ -4,7 +4,7 @@ class Note < ActiveRecord::Base
   validates :content, presence: true
   validates :type, presence: true
   validates :outstanding, presence: true
-  validates_associated :tenants
-  validates_associated :apartments
+  validates_associated :tenant
+  validates_associated :apartment
 
 end

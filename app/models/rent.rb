@@ -4,7 +4,7 @@ class Rent < ActiveRecord::Base
   validates :amount, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :month, presence: true
   validates :pay_status, presence: true
-  validates_associated :tenants
-  validates_associated :apartments
+  validates_associated :tenant
+  validates_associated :apartment
 
 end
