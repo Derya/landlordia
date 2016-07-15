@@ -1,3 +1,12 @@
+
+helpers do
+  def add_errors_to_session(errors)
+    errors.full_messages.each do |error_msg|
+      session[:flash] = session[:flash] + error_msg + ", "
+    end
+  end
+end
+
 # Homepage (Root path)
 get '/' do
   erb :index
@@ -99,7 +108,7 @@ end
 post '/landlord/apartment/:id/new_tenant' do
   apartment_to = Apartment.find(params[:id])
   if apartment_to
-    new_ten = Tenant.new(name: params[:tenant_name], email: params[:tenant_email], phone_number: params[:tenant_phone], apartment_id: apartment_to.id, status: "incoming")
+    new_ten = Tenant.new(name: params[:tenant_name], email: params[:tenant_email], phone_number: params[:tenant_phone], apartment_id: apartment_to.id, active: "upcoming")
     if new_ten.validate && apartment_to.validate
       # TODO this feels dangerous
       new_ten.save
@@ -107,23 +116,62 @@ post '/landlord/apartment/:id/new_tenant' do
       session[:flash] = "Created new tenant #{params[:tenant_name]}."
     else
       session[:flash] = "Errors for creating new tenant #{params[:tenant_name]}: "
-      @new_ten.errors.full_messages.each do |error_msg|
-        session[:flash] = session[:flash] + error_msg + ", "
-      end
-      @apartment_to.errors.full_messages.each do |error_msg|
+      add_errors_to_session(new_ten.errors)
+      add_errors_to_session(apartment_to.errors)
+      session[:flash] = session[:flash].chomp(", ")
+    end
+
+  redirect '/landlord/apartment/' + params[:id].to_s
+  else
+    session[:flash] = "couldn't find apartment #{params[:id]}"
+
+    redirect '/landlord/'
+  end
+
+  
+end
+
+post '/landlord/apartment/:id/update_rent' do
+  apartment_to = Apartment.find(params[:id])
+  if apartment_to
+    new_rent = params[:new_rent].to_f
+
+    # apartment_to.rent = 
+
+
+    redirect '/landlord/apartment/' + params[:id].to_s
+  else
+    session[:flash] = "couldn't find apartment #{params[:id]}"
+
+    redirect '/landlord/'
+  end
+
+end
+
+post '/landlord/apartment/:id/update_lease' do
+    apartment_to = Apartment.find(params[:id])
+  if apartment_to
+
+    apartment_to.lease_start = params[:lease_start]
+    apartment_to.lease_end = params[:lease_end]
+    if apartment_to.save
+      session[:flash] = "Lease dates updated"
+    else
+      session[:flash] = "Errors for creating new tenant #{params[:tenant_name]}: "
+      apartment_to.errors.full_messages.each do |error_msg|
         session[:flash] = session[:flash] + error_msg + ", "
       end
       session[:flash] = session[:flash].chomp(", ")
     end
+
+    redirect '/landlord/apartment/' + params[:id].to_s
   else
-    session[:flash] = "error"
+    session[:flash] = "couldn't find apartment #{params[:id]}"
+
+    redirect '/landlord/'
   end
 
-  redirect '/landlord/apartment/' + params[:id].to_s
 end
-
-
-
 
 
 

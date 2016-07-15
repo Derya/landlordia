@@ -3,7 +3,7 @@
 <main class="description">
   <div class="description-container">
     <header>
-      <h2 id="allow-editing-switch">Allow editing</h2>
+      <h2 id="allow-editing-switch" style="color:red">Allow editing</h2>
       <!-- consider how this should look, later. for example it could be a button, but that may not be necessary.
             it is possible to make the cursor hover over it be the "button" mode without making the element a button
             by doing css for cursor hover pointer, and to just style the text to look different -->
@@ -13,12 +13,23 @@
       <tr>
         <td>Lease start</td>
         <td class="show-col"><%=@apartment.lease_start%></td>
-        <td class="edit-col">asdf</td>
+        <td class="edit-col">
+          <%=@apartment.lease_start%>
+        </td>
       </tr>
       <tr>
         <td>Lease end</td>
         <td class="show-col"><%=@apartment.lease_end%></td>
-        <td class="edit-col">asdf</td>
+        <td class="edit-col">
+          <%=@apartment.lease_start%>
+          <form method="post" action="/landlord/apartment/<%= @apartment.id %>/update_lease" style="display:inline"><!-- TODO: MOVE DISPLAY TO CSS -->
+            <label for="lease_start">New Lease Start</label>
+            <input name="lease_start" type="date" id="lease_start" value="<%=@apartment.lease_start%>">
+            <label for="lease_end">New Lease End</label>
+            <input name="lease_end" type="date" id="lease_end" value="<%=@apartment.lease_end%>">
+            <button type="submit">Update Lease Dates</button>
+          </form>
+        </td>
       </tr>
       <tr>
         <td>Parking spaces</td>
@@ -49,7 +60,14 @@
       <tr>
         <td>Rent amount</td>
         <td class="show-col"><%=@apartment.rents.last.amount %></td>
-        <td class="edit-col">asdf</td>
+        <td class="edit-col">
+          <%=@apartment.rents.last.amount %>
+            <form method="post" action="/landlord/apartment/<%= @apartment.id %>/update_rent" style="display:inline"><!-- TODO: MOVE DISPLAY TO CSS -->
+              <label for="new_rent">Update Rent</label>
+              <input name="new_rent" type="string" id="new_rent">
+              <button type="submit">Submit</button>
+            </form>
+        </td>
       </tr>
       <tr>
         <td>Current tenant name</td>
@@ -59,9 +77,9 @@
           <button id="show-new-tenant-form-button">New Tenant!</button>
           <form method="post" action="/landlord/apartment/<%= @apartment.id %>/new_tenant" id="show-new-tenant-form">
             <label for="lease_start">Lease Start:</label>
-            <input name="lease_start" type="date" id="lease_start">
+            <input name="lease_start" type="date" id="lease_start" value="<%=@apartment.lease_end%>">
             <label for="lease_end">Lease End:</label>
-            <input name="lease_end" type="date" id="lease_end">
+            <input name="lease_end" type="date" id="lease_end" value="<%=@apartment.lease_end%>">
             <label for="tenant_name">Tenant Name:</label>
             <input name="tenant_name" type="text" id="tenant_name">
             <label for="tenant_email">Tenant Email:</label>
