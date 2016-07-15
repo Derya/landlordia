@@ -5,6 +5,5 @@ class Tenant < ActiveRecord::Base
   validates :name, presence: true
   validates :email, presence: true
   validates :phone_number, presence: true
-  validates :active, presence: true
 
 end
