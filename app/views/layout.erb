@@ -21,7 +21,13 @@
 </head>
 <body>
 
+  <% if request.path_info != '/'%>
+    <%= erb :_navbar%>
+  <% end %>
+
   <%= yield %>
+
+  <%= erb :_footer%>
 
 </body>
 </html>
