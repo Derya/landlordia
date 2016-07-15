@@ -25,11 +25,11 @@
       </tr>
       <tr>
         <td>Current tenant name</td>
-        <td><%=@apartment.tenants.where(active: true).name%></td>
+        <td><%=@apartment.tenant%></td>
       </tr>
       <tr>
         <td>Notes</td>
-        <td><a href='/landlord/apartment/<%= @apartment.id %>/notes'>See all notes</a></td>
+        <td><a href='/landlord/apartment/<%= @apartment.id %>/notes'>See all notes</a><%=@apartment.notes %></td>
       </tr>
       <tr>
         <td>Tenants</td>

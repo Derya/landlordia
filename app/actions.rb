@@ -17,7 +17,7 @@ get '/landlord/apartment/edit' do
   erb :'landlord/apartment/edit'
 end
 # Maybe change this to a PUT?
-post 'landlord/apartment/:id' do
+post '/landlord/apartment/:id' do
   # This should get the params[:id] from the url?
   @carspace = CarSpace.find params[:carspace.id]
   # This is checking if the carspace apartment_id is different to the one you're trying to change it to but it's not empty.
@@ -31,21 +31,31 @@ post 'landlord/apartment/:id' do
   @carspace.update(apartment_id: params[:id])
 end
 
-get 'landlord/apartment/:id/notes' do
+get '/landlord/apartment/:id/notes' do
   @notes = Apartment.where(id: params[:id]).notes
   erb :'landlord/apartment/notes'
 end
 
-get 'landlord/apartment/:id/tenants' do
+get '/landlord/apartment/:id/tenants' do
   @tenants = Apartment.where(id: params[:id]).tenants
   erb :'landlord/apartment/tenants'
 end
 
-get 'landlord/apartment/:id/rents' do
+get '/landlord/apartment/:id/rents' do
   @rents = Apartment.where(id: params[:id]).rents
   erb :'landlord/apartment/rent'
 end
 
-get 'tenant/note/new' do
-  erb :'tenant/note/new'
+get '/tenant/note/new' do
+  erb :'tenant/note'
+end
+
+post '/tenant/note' do
+  @apartment = Apartment.find_by(apartment_number: params[:apartment_number])
+  @apartment.notes.create(
+    content: params[:content],
+    type: params[:type],
+    outstanding: true,
+    )
+  redirect '/'
 end

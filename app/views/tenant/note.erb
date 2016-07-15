@@ -1,0 +1,22 @@
+<main class="tenant-form">
+<h1>Add a new note</h1>
+  <form method="post" action="/tenant/note">
+    <div><label>Type:</label>
+      <select name="rating">
+        <option value="Notification">Notification</option>
+        <option value="Service Request">Service Request</option>
+      </select>
+    </div>
+    <div>
+      <label>Apartment number:</label>
+      <input type="text" name="apartment_number">
+    </div>
+    <div>
+      <label>Note:</label>
+      <textarea type="text" name="content" rows="3"></textarea>
+    </div>
+    <div>
+      <input type="submit" class="btn btn-primary" value="Submit">
+    </div>
+  </form>
+</main>
