@@ -2,15 +2,28 @@
   <table>
     <thead>
       <tr>
-        <th colspan="2">Apartment &num; <%= @apartment.apartment_number %></th>
+        <th colspan="2"><a href='/landlord/apartment/<%=@apartment.id%>'>Apartment &num; <%= @apartment.apartment_number %></a></th>
       </tr>
     </thead>
     <tbody>
-      <% @notes.each do |note|%>
-        <tr>
-          <td><%= note.note_type %></td>
-          <td><%= note.content %></td>
-        </tr>
+      <tr>
+        <td>Type</td>
+        <td>Note</td>
+        <td>Status</td>
+        <td>Date raised</td>
+      </tr>
+      <% @ordered_notes = @notes.order(outstanding: :desc) %>
+      <% @ordered_notes.each do |note|%>
+      <tr> 
+        <td><%= note.note_type %></td>
+        <td><%= note.content %></td>
+        <td><% if note.outstanding%>
+          Outstanding
+        <% else %>
+          Not outstanding
+          <% end %></td>
+        <td><%= note.created_at.strftime("%e %B %Y") %></td>
+      </tr>
       <%end%>
     </tbody>
   </table>

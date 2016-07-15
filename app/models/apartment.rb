@@ -16,7 +16,11 @@ class Apartment < ActiveRecord::Base
   end
 
   def tenant
-    self.tenants.find_by(active: true)
+    self.tenants.find_by(active: "Active")
+  end
+
+  def upcoming_tenant
+    self.tenants.find_by(active: "Upcoming")
   end
 
   private
@@ -26,11 +30,7 @@ class Apartment < ActiveRecord::Base
   end
 
   def at_most_one_tenant_active
-    errors.add(:base,"can have at most 1 active tenant") if self.tenants.where(active: true).count > 1
-  end
-
-  def self.ending_soon?
-    lease_end.between?(Date.today, 2.months.since)
+    errors.add(:base,"can have at most 1 active tenant") if self.tenants.where(active: "Active").count > 1
   end
 
 end

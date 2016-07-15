@@ -2,16 +2,27 @@
   <table>
     <thead>
       <tr>
-        <th colspan="4">Apartment &num; <%= @apartment.apartment_number %></th>
+        <th colspan="4"><a href='/landlord/apartment/<%=@apartment.id%>'>Apartment &num; <%= @apartment.apartment_number %></a></th>
       </tr>
     </thead>
     <tbody>
-      <% @tenants.each do |tenant|%>
+        <tr>
+          <td>Name</td>
+          <td>Email</td>
+          <td>Phone number </td>
+          <td>Status</td>
+        </tr>
+      <% @ordered_tenants = @tenants.order(active: :desc) %>
+      <% @ordered_tenants.each do |tenant|%>
         <tr>
           <td><%= tenant.name %></td>
-          <td><%= tenant.email %></td>
+          <td><a href='mailto:<%=tenant.email%>'><%= tenant.email %></a></td>
           <td><%= tenant.phone_number %></td>
-          <td><%= tenant.active %></td>
+          <td><% if tenant.active == "active" %>
+              Active
+            <% else %>
+              Not Active
+            <% end %></td>
         </tr>
       <%end%>
     </tbody>

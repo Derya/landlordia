@@ -2,14 +2,20 @@
   <table>
     <thead>
       <tr>
-        <th colspan="3">Apartment &num; <%= @apartment.apartment_number %></th>
+        <th colspan="3"><a href='/landlord/apartment/<%=@apartment.id%>'>Apartment &num; <%= @apartment.apartment_number %></a></th>
       </tr>
     </thead>
     <tbody>
-      <% @rents.each do |rent|%>
+      <tr>
+        <td>Amount</td>
+        <td>Month</td>
+        <td>Status</td>
+      </tr>
+      <% @ordered_rents = @rents.order(month: :desc) %>
+      <% @ordered_rents.each do |rent|%>
         <tr>
           <td><%= rent.amount %></td>
-          <td><%= rent.month %></td>
+          <td><%= rent.month.strftime("%B %Y") %></td>
           <td><%= rent.pay_status %></td>
         </tr>
       <%end%>
