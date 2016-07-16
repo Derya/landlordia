@@ -95,14 +95,14 @@ post '/landlord/apartment/:id/assign_car_space' do
   car_space = CarSpace.find(params[:new_car_space])
   if apartment_to
     if car_space
-      overwriting = car_space.apartment.apartment_number
+      overwriting = car_space.apartment ? car_space.apartment.apartment_number : nil
       car_space.apartment = apartment_to
       car_space.save
 
       unless overwriting
         session[:flash] = "Parking spot #{car_space.id} assigned to apartment #{params[:id]}"
       else
-        session[:flash] = "Parking spot #{car_space.id} unassigned from apt #{overwriting} and assigned to apartment #{params[:id]}"
+        session[:flash] = "Parking spot #{car_space.id} unassigned from apartment #{overwriting} and assigned to apartment #{params[:id]}"
       end
     else
       session[:flash] = "Parking spot #{car_space.id} not found"
