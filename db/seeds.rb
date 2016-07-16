@@ -23,10 +23,6 @@ def get_random_rent
   [1800,2000,1300,1950,1975].sample
 end
 
-def rents_to_unpay
-  [0,0,0,0,1,2].sample
-end
-
 NUM_APTS.times do
   @apt = Apartment.new
   # make a new apartment
@@ -49,6 +45,9 @@ NUM_APTS.times do
 
     # move out old tenant
     @tenant.active = "Inactive"
+    @tenant.rents.each do |rent|
+      rent.pay_status = "Paid" if rent.pay_status == "Not paid" 
+    end
     @tenant.save unless @tenant.name == "baourghaough" # avoid tenant made outside loop
 
     # make a new tenant
@@ -115,7 +114,7 @@ NUM_APTS.times do
     end
 
     rentz = @tenant.rents
-    rents_back = rents_to_unpay
+    rents_back = [0,0,0,0,0,1,2].sample
 
     # go back and unpay some rents
     rentz.last(rents_back).each do |rent|
