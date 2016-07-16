@@ -160,5 +160,12 @@
     font-size: 400%;
   }
 
-
+  .floor-plan .pay-rent {
+    background: yellow;
+    color: white;
+    left: 20%;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+  }
 
