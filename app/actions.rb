@@ -1,9 +1,11 @@
 
 helpers do
   def add_errors_to_session(errors)
+    session[:flash] = "" unless session[:flash]
     errors.full_messages.each do |error_msg|
-      session[:flash] = session[:flash] + error_msg + ", "
+      session[:flash] = (session[:flash]) + error_msg + ", "
     end
+    session[:flash] = session[:flash].chomp(", ")
   end
 end
 
@@ -51,12 +53,16 @@ end
 post '/tenant/note' do
   @apartment = Apartment.find_by(apartment_number: params[:apartment_number])
   if @apartment
-    @apartment.notes.create(
+    note = @apartment.notes.new(
       content: params[:content],
       note_type: params[:type],
       outstanding: true,
       )
-    session[:flash] = "Message for apartment #{@apartment.apartment_number} sent."
+    if note.save
+      session[:flash] = "Thank you for your submission, Sir Landlord will contact you directly."
+    else
+      add_errors_to_session(note.errors)
+    end
     redirect '/tenant/note/new'
   else
     session[:flash] = "Could not find apartment #{params[:apartment_number]}."
@@ -125,8 +131,8 @@ post '/landlord/apartment/:id/new_tenant' do
     else
       session[:flash] = "Errors for creating new tenant #{params[:tenant_name]}: "
       add_errors_to_session(new_ten.errors)
+      session[:flash] = session[:flash] + ", "
       add_errors_to_session(apartment_to.errors)
-      session[:flash] = session[:flash].chomp(", ")
     end
 
   redirect '/landlord/apartment/' + params[:id].to_s

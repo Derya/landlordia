@@ -12,6 +12,8 @@
         <td>Status</td>
         <td>Update</td>
         <td>Date raised</td>
+        <td>Date closed</td>
+        <td>Tenant raising request</td>
       </tr>
       <% @ordered_notes = @notes.order(outstanding: :desc) %>
       <% @ordered_notes.each do |note|%>
@@ -31,6 +33,8 @@
           <% end %>
         </td>
         <td><%= note.created_at.strftime("%e %B %Y") %></td>
+        <td><%= note.updated_at.strftime("%e %B %Y") %></td>
+        <td><%= note.tenant.name %></td>
       </tr>
       <%end%>
     </tbody>

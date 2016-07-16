@@ -12,17 +12,13 @@
           <td>Phone number </td>
           <td>Status</td>
         </tr>
-      <% @ordered_tenants = @tenants.order(active: :desc) %>
+      <% @ordered_tenants = @tenants.order(:active) %>
       <% @ordered_tenants.each do |tenant|%>
         <tr>
           <td><%= tenant.name %></td>
           <td><a href='mailto:<%=tenant.email%>'><%= tenant.email %></a></td>
           <td><%= tenant.phone_number %></td>
-          <td><% if tenant.active == "Active" %>
-              Active
-            <% else %>
-              Not Active
-            <% end %></td>
+          <td><%= tenant.active%></td>
         </tr>
       <%end%>
     </tbody>
