@@ -9,7 +9,7 @@
     <main class="alerts-body">
       <% if mode == "all" %>
         <ul class="alerts-list">
-          <% overdues = Apartment.joins(:rents).where(rents: { pay_status: 'not paid'}) %>
+          <% overdues = Apartment.joins(:rents).where(rents: { pay_status: 'Not paid'}) %>
           <% overdues.uniq.each do |overdue| %>
             <li><a href="/landlord/apartment/<%= overdue.id%>" ><%= overdue.apartment_number %></a></li>
           <% end %>
@@ -34,7 +34,7 @@
     <main class="alerts-body">
       <ul class="alerts-list">
         <% if mode == "all"%>
-          <% outstanding = Apartment.joins(:notes).where(notes: { outstanding: true}) %>
+          <% outstanding = Apartment.joins(:notes).where(notes: { outstanding: true} ) %>
           <% outstanding.uniq.each do |outstanding| %>
             <li><a href="/landlord/apartment/<%= outstanding.id%>/notes" ><%= outstanding.apartment_number %></a> </li>
           <% end %>
