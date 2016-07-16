@@ -7,6 +7,8 @@ class Apartment < ActiveRecord::Base
   validate :lease_times
   validate :at_most_one_tenant_active
 
+  MONTHS_NOTICE = 2
+
   def tenant_name
     if self.tenant
       self.tenant.name
@@ -23,6 +25,22 @@ class Apartment < ActiveRecord::Base
     self.tenants.find_by(active: "Upcoming")
   end
 
+  def lease_ending?
+    lease_end.between?(Date.today, MONTHS_NOTICE.months.since)
+  end
+
+  def self.lease_ending
+    Apartment.where(lease_end: (Date.today)..(MONTHS_NOTICE.months.since))
+  end
+
+  def outstanding?
+    notes.find_by(outstanding: true)
+  end
+
+  def overdue?
+    rents.find_by(pay_status: 'Not paid')
+  end
+
   private
 
   def lease_times
@@ -32,5 +50,7 @@ class Apartment < ActiveRecord::Base
   def at_most_one_tenant_active
     errors.add(:base,"can have at most 1 active tenant") if self.tenants.where(active: "Active").count > 1
   end
+
+  
 
 end

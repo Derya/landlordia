@@ -9,7 +9,7 @@
   <main class="alerts-body">
     <% if mode == "all" %>
       <ul class="alerts-list">
-        <% overdues = Apartment.joins(:rents).where(rents: { pay_status: 'not paid'}) %>
+        <% overdues = Apartment.joins(:rents).where(rents: { pay_status: 'Not paid'}) %>
         <% overdues.uniq.each do |overdue| %>
           <li><a href="/landlord/apartment/<%= overdue.id%>" ><%= overdue.apartment_number %></a></li>
         <% end %>
@@ -17,13 +17,12 @@
       </ul>
     <% end %>
     <% if mode == "apartment" %>
-      <% if @apartment.rents.find_by(pay_status: 'not paid') %>
+      <% if @apartment.overdue? %>
         Yes
       <% else %>
         No 
       <% end %>
     <% end %>
-
   </main>
 </section>
 
@@ -56,14 +55,14 @@
   <main class="alerts-body">
     <% if mode == "all" %>
       <ul class="alerts-list">
-      <% Apartment.where(lease_end: (Date.today)..(2.months.since)).each do |apartment|%>
+      <% Apartment.lease_ending.each do |apartment|%>
         <li><a href="/landlord/apartment/<%= apartment.id%>" ><%=apartment.apartment_number%></a></li>
       <% end %>
     <% end %>
         <!--populate the list with query on lease ending soon -->
       </ul>
       <% if mode == "apartment" %>
-        <% if @apartment.lease_end.between?(Date.today, 2.months.since) %>
+        <% if @apartment.lease_ending? %>
           Yes
         <% else %>
           No
