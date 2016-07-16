@@ -1,11 +1,7 @@
 <main class="description">
-  <table>
-    <thead>
-      <tr>
-        <th colspan="2"><a href='/landlord/apartment/<%=@apartment.id%>'>Apartment &num; <%= @apartment.apartment_number %></a></th>
-      </tr>
-    </thead>
-    <tbody>
+  <h1 class="apartment_number"><a href='/landlord/apartment/<%=@apartment.id%>'>Apartment &num; <%= @apartment.apartment_number %></a></h1>
+  <table class="table">
+    <thead class="thead">
       <tr>
         <td>Type</td>
         <td>Note</td>
@@ -15,11 +11,13 @@
         <td>Date closed</td>
         <td>Tenant raising request</td>
       </tr>
+    </thead>
+    <tbody>
       <% @ordered_notes = @notes.order(outstanding: :desc) %>
       <% @ordered_notes.each do |note|%>
       <tr> 
         <td><%= note.note_type %></td>
-        <td><%= note.content %></td>
+        <td class="note_content"><%= note.content %></td>
         <td><% if note.outstanding%>
           Outstanding
         <% else %>
@@ -28,7 +26,7 @@
         <td><% if note.outstanding%>
           <form method="post" action="/landlord/notes/<%=note.id%>">
           <input type="hidden" name="apartment_id" value="<%= note.apartment_id %>">
-          <button>Close</button>
+          <button class="btn">Close</button>
           </form>
           <% end %>
         </td>

@@ -1,17 +1,15 @@
 <main class="description">
-  <table>
-    <thead>
-      <tr>
-        <th colspan="4"><a href='/landlord/apartment/<%=@apartment.id%>'>Apartment &num; <%= @apartment.apartment_number %></a></th>
-      </tr>
-    </thead>
-    <tbody>
+  <h1 class="apartment_number"><a href='/landlord/apartment/<%=@apartment.id%>'>Apartment &num; <%= @apartment.apartment_number %></a></h1>
+  <table class="table">
+    <thead class="thead">
         <tr>
           <td>Name</td>
           <td>Email</td>
           <td>Phone number </td>
           <td>Status</td>
         </tr>
+      </thead>
+      <tbody>
       <% @ordered_tenants = @tenants.order(:active) %>
       <% @ordered_tenants.each do |tenant|%>
         <tr>
