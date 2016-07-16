@@ -70,10 +70,12 @@ end
 post '/tenant/note' do
   @apartment = Apartment.find_by(apartment_number: params[:apartment_number])
   if @apartment
+    @tenant = @apartment.tenants.where(email: params[:email]).ids
     note = @apartment.notes.new(
       content: params[:content],
       note_type: params[:type],
       outstanding: true,
+      tenant_id: @tenant[0],
       )
     if note.save
       session[:flash] = "Thank you for your submission, Sir Landlord will contact you directly."
