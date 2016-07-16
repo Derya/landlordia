@@ -21,123 +21,155 @@
   background-size:cover;
 }*/
 
-  body{
-    background-size: cover;
-    color: #fff;
-    /*background:rgba(0,0,0,0.4);*/
-    text-align: center;
-  }
 
-  .navbar-brand {
-    font-family: 'Righteous', cursive;
-    font-size: 120%;
-  }
+body{
+  background-size: cover;
+  color: #fff;
+  /*background:rgba(0,0,0,0.4);*/
+  text-align: center;
+  padding-left:20px;
+  padding-right:20px;
+}
 
-  .branded-letter{
-    font-family: 'Lobster', cursive;
-    font-size: 250%;
-    color: #1B3957;
-  }
+.navbar-brand {
+  font-family: 'Righteous', cursive;
+  font-size: 120%;
+}
 
-  .main-logo {
-    font-family: 'Righteous', cursive;
-    font-size: 600%;
-    text-align: center;
-  }
+.branded-letter{
+  font-family: 'Lobster', cursive;
+  font-size: 250%;
+  color: #1B3957;
+}
 
-  .living-together {
-    font-size: 300%;
-    line-height: 600%;
-  }
+.main-logo {
+  font-family: 'Righteous', cursive;
+  font-size: 600%;
+  text-align: center;
+}
 
-  hr { 
-    padding: 0;
-    border: none; 
-    border-top: medium double #8c8c8c; 
-    color: #8c8c8c; 
-    text-align: center; 
-  } 
-  hr:after { 
-    content: "§"; 
-    display: inline-block; 
-    position: relative; 
-    top: -0.7em; 
-    font-size: 1.5em; 
-    padding: 0 0.25em; 
-  }
+.living-together {
+  font-size: 300%;
+  line-height: 600%;
+}
 
-  .footer{
-    height: 20px;
-    clear: all;
-    
-  }  
+hr { 
+  padding: 0;
+  border: none; 
+  border-top: medium double #8c8c8c; 
+  color: #8c8c8c; 
+  text-align: center; 
+} 
+hr:after { 
+  content: "§"; 
+  display: inline-block; 
+  position: relative; 
+  top: -0.7em; 
+  font-size: 1.5em; 
+  padding: 0 0.25em; 
+}
 
-  #alerts h1 {
-    font-family: 'Righteous', cursive;
-  }
+.footer{
+  height: 20px;
+  clear: all;
+  
+}  
 
-  .floor-plan {
-    overflow: hidden;
-    position: relative;
-  }
-  .floor-plan img {
-    width: 100%;
-    height: 100%;
-  }
-  .floor-plan .lease-ending {
-    background: #A61C16;
-    color: white;
-    left: -20%;
-    position: absolute;
-    text-align: center;
-    top: 15%;
-    transform: rotate(-45deg);
-    width: 100%;
-  }
+#alerts h1 {
+  font-family: 'Righteous', cursive;
+}
 
-  .floor-plan .unoccupied {
-    opacity: 0.7;
-    background: #EBF3F3;
-    color: #EBF3F3;
-    left: 0%;
-    position: absolute;
-    text-align: center;
-    top: 0%;
-    width: 100%;
-    height: 100%;
-  }
+.alert {
+  margin:auto;
+  width: 80%;
+  border-radius:20px;
+  background-color:pink;
+}
 
-  .floor-plan .overdue {
-    opacity: 0.4;
-    background: #A61C16;
-    color: #A61C16;
-    left: 0%;
-    position: absolute;
-    text-align: center;
-    top: 0%;
-    width: 100%;
-    height: 100%;
-  }
+.stuff {
+  margin-left:200px;
+  background-color:green;
+}
 
-  .floor-plan .outstanding img{
-    position: absolute; 
-    top: 25px; 
-    left: 25px;
-    height: 85%;
-    width: 85%;
-  }
+#apartments {
+  float:right;
+  width:75%;
+}
 
-  .floor-plan .apt-number {
-    color: #000;
-    left: 0%;
-    position: absolute;
-    text-align: center;
-    top: 35%;
-    width: 100%;
-    height: 100%;
-    font-family: 'Righteous', cursive;
-    font-size: 400%;
-  }
+#alerts {
+  width:25%;
+  float:left;
+
+  max-width:350px;
+  background-color:grey;
+}
+
+.floor-plan {
+  max-height:350px;
+  max-width:350px;
+  overflow: hidden;
+  position: relative;
+}
+.floor-plan img {
+  width: 100%;
+  height: 100%;
+}
+.floor-plan .lease-ending {
+  background: #A61C16;
+  color: white;
+  left: -20%;
+  position: absolute;
+  text-align: center;
+  top: 15%;
+  transform: rotate(-45deg);
+  width: 100%;
+}
+
+.floor-plan .unoccupied {
+  opacity: 0.7;
+  background: #EBF3F3;
+  color: #EBF3F3;
+  left: 0%;
+  position: absolute;
+  text-align: center;
+  top: 0%;
+  width: 100%;
+  height: 100%;
+}
+
+.floor-plan .overdue {
+  opacity: 0.4;
+  background: #A61C16;
+  color: #A61C16;
+  left: 0%;
+  position: absolute;
+  text-align: center;
+  top: 0%;
+  width: 100%;
+  height: 100%;
+}
+
+.floor-plan .outstanding img{
+  position: absolute; 
+  top: 25px; 
+  left: 25px;
+  height: 85%;
+  width: 85%;
+}
+
+.floor-plan .apt-number {
+  color: #000;
+  left: 0%;
+  position: absolute;
+  text-align: center;
+  top: 35%;
+  width: 100%;
+  height: 100%;
+  font-family: 'Righteous', cursive;
+  font-size: 400%;
+}
 
 
-
+.footer {
+  clear:both;
+}
