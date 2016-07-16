@@ -10,6 +10,7 @@
         <td>Amount</td>
         <td>Month</td>
         <td>Status</td>
+        <td>Tenant</td>
       </tr>
       <% @ordered_rents = @rents.order(month: :desc) %>
       <% @ordered_rents.each do |rent|%>
@@ -17,6 +18,7 @@
           <td><%= rent.amount %></td>
           <td><%= rent.month.strftime("%B %Y") %></td>
           <td><%= rent.pay_status %></td>
+          <td><%= rent.tenant.name %></td>
         </tr>
       <%end%>
     </tbody>
