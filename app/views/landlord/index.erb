@@ -1,3 +1,11 @@
+<div id="alerts">
+  <div class="col-sm-3">
+
+  <%= erb :'_alerts', locals: { mode: "all" } %>
+
+  </div>
+</div>
+
 <main class="overview">
   <div class="overview-container">
     <%@apartments.each do |apartment|%>
@@ -5,9 +13,3 @@
     <% end %>
   </div>
 </main>
-
-<div id="alerts">
-
-  <%= erb :'_alerts', locals: { mode: "all" } %>
-
-</div>
