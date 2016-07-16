@@ -7,38 +7,37 @@
     See: http://necolas.github.com/normalize.css/
   -->
 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.1.0/css/bulma.css">
+
   <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
-
-  <link rel="stylesheet" href="/stylesheets/style.css">
-  <link rel="stylesheet" href="/stylesheets/normalize.css">
-  <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.1.0/css/bulma.css">
-  <!--
-    application.css is where you put your styles
-  -->
-  <link rel="stylesheet" href="/stylesheets/application.css">
-
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+  <link rel="stylesheet" href="/stylesheets/application.css">
+  <link rel="stylesheet" href="/stylesheets/normalize.css">
+  <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+   
   <script src="/javascript/application.js"></script>
 
-  <title></title>
+  <title>Landlordia</title>
 </head>
-<body>
+  <body>
+    <div >
 
-  <% if request.path_info != '/'%>
-    <%= erb :_navbar%>
-  <% end %>
+    <% if request.path_info != '/'%>
+      <%= erb :_navbar%>
+    <% end %>
 
-  <% if session[:flash] %>
-    <div class="alert alert-success" role="alert"><%= session[:flash] %></div>
-    <% session.delete(:flash) %>
-  <% end %>
+    <% if session[:flash] %>
+      <div class="alert alert-success" role="alert"><%= session[:flash] %></div>
+      <% session.delete(:flash) %>
+    <% end %>
 
-  <%= yield %>
+    <%= yield %>
+    </div>
 
-  <%= erb :_footer%>
+    <%= erb :_footer%>
 
-</body>
+  </body>
 </html>
 
