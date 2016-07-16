@@ -1,0 +1,23 @@
+body {
+  background:url('/media/Winchester.jpg') no-repeat center center;
+  color: #fff;
+  background-size: cover;
+}
+.branded-letter{
+    font-family: 'Lobster', cursive;
+    font-size: 250%;
+    color: #fff;
+  }
+.collapse, .navbar-header a{
+  color : #fff;
+}
+.navbar-right {
+  font-family: 'Righteous', cursive;
+  font-size: 130%;
+}
+.navbar-right a{
+    color: #fff;
+}
+.navbar-right a:hover{
+    background: transparent;
+}

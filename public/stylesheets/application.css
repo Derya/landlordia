@@ -21,7 +21,6 @@
   background-size:cover;
 }*/
 
-
 body{
   background-size: cover;
   color: #fff;
@@ -74,6 +73,10 @@ hr:after {
   clear: all;
   
 }  
+
+#alerts ul{
+  list-style-type: none;
+}
 
 #alerts h1 {
   font-family: 'Righteous', cursive;
@@ -155,6 +158,7 @@ hr:after {
   left: 25px;
   height: 85%;
   width: 85%;
+  opacity: 1;
 }
 
 .floor-plan .apt-number {
@@ -169,7 +173,17 @@ hr:after {
   font-size: 400%;
 }
 
-
 .footer {
-  clear:both;
+  clear:all;
+  background-color: #fff;
+}
+
+.footer p {
+  padding: 2%;
+  left: 0;
+  margin:0 auto -155;
+  height: 100px;
+  width: 100%;
+  overflow: hidden;
+  background-color: #fff;
 }
