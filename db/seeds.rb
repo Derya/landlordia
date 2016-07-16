@@ -45,6 +45,7 @@ NUM_APTS.times do
 
     # move out old tenant
     @tenant.active = "Inactive"
+    # pay their rents
     @tenant.rents.each do |rent|
       rent.pay_status = "Paid" if rent.pay_status == "Not paid" 
     end

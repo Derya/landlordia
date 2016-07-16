@@ -76,6 +76,17 @@
             </form>
         </td>
       </tr>
+      <% if tenant = @apartment.tenant %>
+        <tr>
+          <td>Rent status</td>
+          <% this_rent = tenant.rents.last %>
+          <% if this_rent %>
+            <td><%= this_rent.pay_status %></td>
+          <% else %>
+            <td>No rent payments yet.</td>
+          <% end %>
+        </tr>
+      <% end %>
       <tr> <!-- ROW FOR CURRENT TENANT (DISPLAYS WITH "UNOCCUPIED" IF THERE IS NONE) -->
         <td>Current tenant name</td>
         <td class="show-col"><%=@apartment.tenant_name%></td>
