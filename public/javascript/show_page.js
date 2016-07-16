@@ -1,9 +1,11 @@
 
 $(document).ready(function()
 {
-
-  // TODO: MOVE THIS DEFAULTING PROPERTY TO CSS, also the first line should be for edit and not show
-  $('.edit-col').toggle();
+  if (startInEditMode)
+    $('.show-col').toggle();
+  else
+    $('.edit-col').toggle();
+  
   $('#show-new-tenant-form').toggle();
 
   $('#allow-editing-switch').click(function()

@@ -1,3 +1,4 @@
+<script>var startInEditMode = <%= @mode_edit %></script>
 <script src="/javascript/show_page.js" type="text/javascript"></script>
 
 <main class="description">
@@ -47,7 +48,15 @@
               <!-- TODO: sort this iterator -->
               <% CarSpace.all.each do |car_space_it| %>
                 <% unless car_space_it.apartment == @apartment %>
-                  <option value="<%= car_space_it.id %>"><%= car_space_it.id %> (<%=  %>)</option>
+                  <option value="<%= car_space_it.id %>">
+                    <%= car_space_it.id %> (
+                    <% if car_space_it.apartment %>
+                      assigned to apt <%= car_space_it.apartment.apartment_number %>
+                    <% else %>
+                      unassigned
+                    <% end %>
+                    )
+                  </option>
                 <% end %>
               <% end %>
             </select>
