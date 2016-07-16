@@ -13,13 +13,13 @@ $(document).ready(function()
   });
 
   var newTenButtonText = $('#show-new-tenant-form-button').html();
-  var ALTTENBUTTONTEXT = "Cancel";
+  var ALT_TENANT_BUTTON_TEXT = "Cancel";
   $('#show-new-tenant-form-button').click(function ()
   {
     $('#show-new-tenant-form').toggle();
     if ($('#show-new-tenant-form-button').html() == newTenButtonText)
     {
-      $('#show-new-tenant-form-button').html(ALTTENBUTTONTEXT);
+      $('#show-new-tenant-form-button').html(ALT_TENANT_BUTTON_TEXT);
     }
     else
     {

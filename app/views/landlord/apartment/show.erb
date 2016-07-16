@@ -4,12 +4,10 @@
   <div class="description-container">
     <header>
       <h2 id="allow-editing-switch" style="color:red;cursor:pointer;display:inline;">Allow editing</h2>
-      <!-- consider how this should look, later. for example it could be a button, but that may not be necessary.
-            it is possible to make the cursor hover over it be the "button" mode without making the element a button
-            by doing css for cursor hover pointer, and to just style the text to look different -->
+      <!-- i put in this temporary inline styling, remove it later, you probably want to apply display:inline in the css however -->
       <h1>Apartment <%=@apartment.apartment_number%></h1>
     </header>
-    <table style="border:1px black solid">
+    <table style="border:1px black solid"> <!-- this temporary styling to help me see where the table is, remove later -->
       <tr>
         <td>Lease start</td>
         <td class="show-col"><%=@apartment.lease_start%></td>
@@ -22,7 +20,7 @@
         <td class="show-col"><%=@apartment.lease_end%></td>
         <td class="edit-col">
           <%=@apartment.lease_start%>
-          <form method="post" action="/landlord/apartment/<%= @apartment.id %>/update_lease" style="display:inline"><!-- TODO: MOVE DISPLAY TO CSS -->
+          <form method="post" action="/landlord/apartment/<%= @apartment.id %>/update_lease" style="display:inline"><!-- MOVE DISPLAY TO CSS -->
             <label for="lease_start">New Lease Start</label>
             <input name="lease_start" type="date" id="lease_start" value="<%=@apartment.lease_start%>">
             <label for="lease_end">New Lease End</label>
@@ -44,12 +42,12 @@
               <button class="unassign-car-space" id="unassign-car-space-<%= car_space.id %>">Unassign <%=car_space.id.to_s %></button>
             </form>
           <% end%>
-          <form method="post" action="/landlord/apartment/<%= @apartment.id %>/assign_car_space" style="display:inline"><!-- TODO: MOVE DISPLAY TO CSS -->
+          <form method="post" action="/landlord/apartment/<%= @apartment.id %>/assign_car_space" style="display:inline"><!-- MOVE DISPLAY TO CSS -->
             <select name="new_car_space" id="new_car_space" class="assign-new-car-space">
               <!-- TODO: sort this iterator -->
               <% CarSpace.all.each do |car_space_it| %>
                 <% unless car_space_it.apartment == @apartment %>
-                  <option value="<%= car_space_it.id %>"><%= car_space_it.id %></option>
+                  <option value="<%= car_space_it.id %>"><%= car_space_it.id %> (<%=  %>)</option>
                 <% end %>
               <% end %>
             </select>
@@ -62,7 +60,7 @@
         <td class="show-col"><%=@apartment.rents.last.amount %></td>
         <td class="edit-col">
           <%=@apartment.rents.last.amount %>
-            <form method="post" action="/landlord/apartment/<%= @apartment.id %>/update_rent" style="display:inline"><!-- TODO: MOVE DISPLAY TO CSS -->
+            <form method="post" action="/landlord/apartment/<%= @apartment.id %>/update_rent" style="display:inline"><!-- MOVE DISPLAY TO CSS -->
               <label for="new_rent">Update Rent</label>
               <input name="new_rent" type="string" id="new_rent">
               <button type="submit">Submit</button>
@@ -96,7 +94,7 @@
           <td class="show-col"><%=@apartment.upcoming_tenant.name%></td>
           <td class="edit-col">
             <%=@apartment.upcoming_tenant.name%>
-            <form method="post" action="/landlord/apartment/<%= @apartment.id %>/delete_upcoming_tenant" style="display:inline"><!-- TODO: MOVE DISPLAY TO CSS -->
+            <form method="post" action="/landlord/apartment/<%= @apartment.id %>/delete_upcoming_tenant" style="display:inline"><!-- MOVE DISPLAY TO CSS -->
               <button type="submit">Delete</button>
             </form>
           </td>
