@@ -1,9 +1,25 @@
-<main class="overview">
-  <div class="overview-container">
-    <%@apartments.each do |apartment|%>
-      <span> <a href='/landlord/apartment/<%= apartment.id%>'><%=apartment.apartment_number %> </a></span>
+<main>
+<% @apartments.each_slice(4) do |group| %>
+  <div class="row">
+    <% group.each do |apt| %>
+      <div class="col-sm-3">
+        <a href='landlord/apartment/<%= apt.id%>'><div class="floor-plan">
+          <img src="/media/squareF.jpg" alt="">
+          <span class="apt-number"><%= apt.apartment_number %></span>
+          <% if apt.lease_ending? %>
+            <span class="lease-ending">lease ending</span>
+          <% end %>
+          <% if apt.outstanding? %>
+            <span class="outstanding">outstanding</span>
+          <% end %>
+          <% if apt.overdue? %>
+            <span class="overdue">overdue</span>
+          <% end %>
+        </div></a>
+      </div>
     <% end %>
   </div>
+<% end %>
 </main>
 
 <div id="alerts">
