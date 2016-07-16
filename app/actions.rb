@@ -1,8 +1,9 @@
 
 helpers do
   def add_errors_to_session(errors)
+    session[:flash] = "" unless session[:flash]
     errors.full_messages.each do |error_msg|
-      session[:flash] = (session[:flash] || "") + error_msg + ", "
+      session[:flash] = (session[:flash]) + error_msg + ", "
     end
     session[:flash] = session[:flash].chomp(", ")
   end
@@ -20,28 +21,29 @@ end
 
 get '/landlord/apartment/:id' do
   @apartment = Apartment.find params[:id]
-  erb :'landlord/apartment/show'
+  @mode_edit = false
+  # TODO
+  # if @apartment
+    erb :'landlord/apartment/show'
+  # else
+  #   erb :'landlord/apartment/error'
+  # end
+end
+
+get '/landlord/apartment/:id/edit' do
+  @apartment = Apartment.find params[:id]
+  @mode_edit = true
+  # TODO
+  # if @apartment
+    erb :'landlord/apartment/show'
+  # else
+  #   erb :'landlord/apartment/error'
+  # end
 end
 
 get '/landlord/apartment/edit' do
   erb :'landlord/apartment/edit'
 end
-
-# # Maybe change this to a PUT?
-# post '/landlord/apartment/:id' do
-#   # This should get the params[:id] from the url?
-#   @carspace = CarSpace.find params[:carspace.id]
-#   # This is checking if the carspace apartment_id is different to the one you're trying to change it to but it's not empty.
-
-#   # If it's different, give a flash to say that it's being overwritten
-#   unless @carspace.apartment_id.nil?
-#     session[:flash] = "Carspace #{@carspace.id} has been moved to this apartment"
-#   else
-#     # Otherwise just let them know it has been changed (this would be if it's empty of the same as the one you're trying to change it to, which would be stupid but ya know, people can be stupid)
-#     session[:flash] = "Carspace #{@carspace.id} has been assigned to this apartment"
-#   end
-#   @carspace.update(apartment_id: params[:id])
-# end
 
 get '/landlord/apartment/:id/notes' do
   @apartment = Apartment.find(params[:id])
@@ -67,47 +69,65 @@ end
 
 post '/tenant/note' do
   @apartment = Apartment.find_by(apartment_number: params[:apartment_number])
-  note = @apartment.notes.new(
-    content: params[:content],
-    note_type: params[:type],
-    outstanding: true,
-    )
-  if note.save
-    session[:flash] = "Thank you for your submission, Sir Landlord will contact you directly."
+  if @apartment
+    note = @apartment.notes.new(
+      content: params[:content],
+      note_type: params[:type],
+      outstanding: true,
+      )
+    if note.save
+      session[:flash] = "Thank you for your submission, Sir Landlord will contact you directly."
+    else
+      add_errors_to_session(note.errors)
+    end
+    redirect '/tenant/note/new'
   else
-    add_errors_to_session(note.errors)
+    session[:flash] = "Could not find apartment #{params[:apartment_number]}."
+    redirect '/tenant/note/new'
   end
-  redirect '/tenant/note/new'
 end
 
 post '/landlord/apartment/:id1/unassign_car_space/:id2' do
-  car_space = CarSpace.find(params[:id2])
-  if car_space
-    car_space.apartment = nil
-    car_space.save
-    redirect '/landlord/apartment/' + params[:id1].to_s
+  apartment_to = Apartment.find(params[:id1])
+  if apartment_to
+    car_space = CarSpace.find(params[:id2])
+    if car_space
+      car_space.apartment = nil
+      car_space.save
+      session[:flash] = "Parking spot #{car_space.id} unassigned from apartment #{params[:id1]}"
+    else
+      session[:flash] = "Parking spot #{car_space.id} not found"
+    end
+    redirect '/landlord/apartment/' + params[:id1].to_s + '/edit'
   else
-    redirect 'google.ca'
+    session[:flash] = "couldn't find apartment #{params[:id1]}"
+    redirect '/landlord'
   end
 end
 
 post '/landlord/apartment/:id/assign_car_space' do
   apartment_to = Apartment.find(params[:id])
   car_space = CarSpace.find(params[:new_car_space])
-  if apartment_to && car_space
-    overwriting = car_space.apartment_id
-    car_space.apartment = apartment_to
-    car_space.save
+  if apartment_to
+    if car_space
+      overwriting = car_space.apartment ? car_space.apartment.apartment_number : nil
+      car_space.apartment = apartment_to
+      car_space.save
 
-    # TODO: flash
-    # unless overwriting
-    #   session[:flash] = "Parking spot #{car_space.id}, which was previously unassigned, has been assigned to apartment #{apartment_to.apartment_number}"
-    # else
-    #   session[:flash] = "Parking spot #{car_space.id} unassigned from apt #{overwriting.apartment_number} and assigned to apartment #{apartment_to.apartment_number}"
-    # end
-    redirect '/landlord/apartment/' + params[:id].to_s
+      unless overwriting
+        session[:flash] = "Parking spot #{car_space.id} assigned to apartment #{params[:id]}"
+      else
+        session[:flash] = "Parking spot #{car_space.id} unassigned from apartment #{overwriting} and assigned to apartment #{params[:id]}"
+      end
+    else
+      session[:flash] = "Parking spot #{car_space.id} not found"
+    end
+
+    redirect '/landlord/apartment/' + params[:id].to_s + '/edit'
   else
-    redirect 'google.ca'
+    session[:flash] = "couldn't find apartment #{params[:id]}"
+
+    redirect '/landlord'
   end
 end
 
@@ -119,7 +139,6 @@ post '/landlord/apartment/:id/new_tenant' do
     apartment_to.lease_start = params[:lease_start]
     apartment_to.lease_end = params[:lease_end]
     if new_ten.validate && apartment_to.validate
-      # TODO this feels dangerous
       new_ten.save
       apartment_to.save
       session[:flash] = "Created new tenant #{params[:tenant_name]}."
@@ -129,15 +148,12 @@ post '/landlord/apartment/:id/new_tenant' do
       session[:flash] = session[:flash] + ", "
       add_errors_to_session(apartment_to.errors)
     end
-
   redirect '/landlord/apartment/' + params[:id].to_s
   else
     session[:flash] = "couldn't find apartment #{params[:id]}"
-
-    redirect '/landlord/'
+    redirect '/landlord'
   end
 
-  
 end
 
 post '/landlord/apartment/:id/update_rent' do
@@ -147,12 +163,11 @@ post '/landlord/apartment/:id/update_rent' do
 
     # apartment_to.rent = 
 
-
-    redirect '/landlord/apartment/' + params[:id].to_s
+    redirect '/landlord/apartment/' + params[:id].to_s + '/edit'
   else
     session[:flash] = "couldn't find apartment #{params[:id]}"
 
-    redirect '/landlord/'
+    redirect '/landlord'
   end
 
 end
@@ -160,7 +175,6 @@ end
 post '/landlord/apartment/:id/update_lease' do
   apartment_to = Apartment.find(params[:id])
   if apartment_to
-
     apartment_to.lease_start = params[:lease_start]
     apartment_to.lease_end = params[:lease_end]
     if apartment_to.save
@@ -172,44 +186,32 @@ post '/landlord/apartment/:id/update_lease' do
       end
       session[:flash] = session[:flash].chomp(", ")
     end
-
-    redirect '/landlord/apartment/' + params[:id].to_s
+    redirect '/landlord/apartment/' + params[:id].to_s + '/edit'
   else
     session[:flash] = "couldn't find apartment #{params[:id]}"
-
-    redirect '/landlord/'
+    redirect '/landlord'
   end
-
 end
 
-
 post '/landlord/apartment/:id/delete_upcoming_tenant' do
-
   apartment_to = Apartment.find(params[:id])
-
   if apartment_to
-
     ten_del = apartment_to.upcoming_tenant
-
     if ten_del && ten_del.destroy
       session[:flash] = "deleted #{ten_del.name if ten_del.name}"
     else
       session[:flash] = "couldn't delete upcoming tenant for apartment #{params[:id]}"
     end
-
     redirect '/landlord/apartment/' + params[:id].to_s
   else
     session[:flash] = "couldn't find apartment #{params[:id]}"
-
-    redirect '/landlord/'
+    redirect '/landlord'
   end
-
 end
-
-# fix google action to have flash messages and fix tenant new note action
 
 
 post '/landlord/notes/:id' do
+  # TODO: add flashes and conditionals here
   @note = Note.find(params[:id])
   @note.outstanding = false
   @note.save
