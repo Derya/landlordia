@@ -1,6 +1,7 @@
 .thead  {
   background-color: #2B4A69;
   color: #EBF3F3;
+  font-size: 16px;
 }
 
 .btn {
@@ -17,6 +18,14 @@
 
 .new_form {
   text-align: center;
+}
+
+.apartment_number {
+  color:#1B3957;
+}
+
+.drop_down {
+  display: inline;
 }
 
 /*  $lobster: Lobster;
