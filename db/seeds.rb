@@ -48,7 +48,7 @@ NUM_APTS.times do
   while time < END_DATE do
 
     # move out old tenant
-    @tenant.active = false
+    @tenant.active = "Inactive"
     @tenant.save unless @tenant.name == "baourghaough" # avoid tenant made outside loop
 
     # make a new tenant
@@ -58,7 +58,7 @@ NUM_APTS.times do
     @tenant.phone_number = Faker::PhoneNumber.phone_number
     @tenant.email = Faker::Internet.email
     # make them active for now
-    @tenant.active = true
+    @tenant.active = "Active"
     # associate with apartment
     @tenant.apartment = @apt
 
@@ -129,7 +129,6 @@ NUM_APTS.times do
     first_ten_rents.each do |rent|
       moddable_rents << rent unless rent.pay_status == "Not paid"
     end
-
     
     if moddable_rents.length > 0
       index = rand(moddable_rents.length)
