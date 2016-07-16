@@ -137,7 +137,7 @@ post '/landlord/apartment/:id/new_tenant' do
   apartment_to = Apartment.find(params[:id])
   if apartment_to
     new_ten = Tenant.new(name: params[:tenant_name], email: params[:tenant_email], phone_number: params[:tenant_phone], apartment_id: apartment_to.id)
-    new_ten.active = (apartment_to.tenant && params[:lease_start] > Time.now) ? "Upcoming" : "Active"
+    new_ten.active = (apartment_to.tenant && params[:lease_start] > Time.now) ? "Coming up" : "Active"
     apartment_to.lease_start = params[:lease_start]
     apartment_to.lease_end = params[:lease_end]
     if new_ten.validate && apartment_to.validate
