@@ -22,7 +22,7 @@
 }*/
 
   body{
-    background: url('/media/Winchester.jpg') no-repeat center center fixed;
+    
     background-size: cover;
     color: #fff;
     /*background:rgba(0,0,0,0.4);*/
@@ -73,11 +73,73 @@
     
   }  
 
-  #alerts {
-    background: yellow;
-    opacity: 0.5;
-  }
-
   #alerts h1 {
     font-family: 'Righteous', cursive;
   }
+
+  .floor-plan {
+    overflow: hidden;
+    position: relative;
+  }
+  .floor-plan img {
+    border-bottom: 40px;*/
+    width: 100%;
+  }
+  .floor-plan .lease-ending {
+    background: #A61C16;
+    color: white;
+    left: -20%;
+    position: absolute;
+    text-align: center;
+    top: 15%;
+    transform: rotate(-45deg);
+    width: 100%;
+  }
+
+  .floor-plan .unoccupied {
+    opacity: 0.7;
+    background: #EBF3F3;
+    color: #EBF3F3;
+    left: 0%;
+    position: absolute;
+    text-align: center;
+    top: 0%;
+    width: 100%;
+    height: 100%;
+  }
+
+  .floor-plan .overdue {
+    opacity: 0.4;
+    background: #A61C16;
+    color: #A61C16;
+    left: 0%;
+    position: absolute;
+    text-align: center;
+    top: 0%;
+    width: 100%;
+    height: 100%;
+  }
+
+  .floor-plan .outstanding {
+    width: 0; 
+    height: 0; 
+    border-left: 55px solid transparent;
+    border-right: 55px solid transparent;    
+    border-bottom: 55px solid yellow;
+    color: transparent;
+  }
+
+  .floor-plan .apt-number {
+    color: #000;
+    left: 0%;
+    position: absolute;
+    text-align: center;
+    top: 35%;
+    width: 100%;
+    height: 100%;
+    font-family: 'Righteous', cursive;
+    font-size: 400%;
+  }
+
+
+

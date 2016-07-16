@@ -23,7 +23,7 @@
           <% if apt.overdue? %>
             <span class="overdue">overdue</span>
           <% end %>
-          <% if apt.tenant %>
+          <% unless apt.tenant %>
             <span class="unoccupied">unoccupied</span>
           <% end %>
         </div></a>
