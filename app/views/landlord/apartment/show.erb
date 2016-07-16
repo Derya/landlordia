@@ -4,29 +4,21 @@
 <main class="description">
   <div class="description-container">
     <header>
-      <h2 id="allow-editing-switch" style="color:red;cursor:pointer;display:inline;">Allow editing</h2>
       <!-- i put in this temporary inline styling, remove it later, you probably want to apply display:inline in the css however -->
-      <h1>Apartment <%=@apartment.apartment_number%></h1>
+      <h1 class="apartment_number">Apartment <%=@apartment.apartment_number%></h1>
+      <button class="btn" id="allow-editing-switch">Edit</button>
     </header>
-    <table style="border:1px black solid"> <!-- this temporary styling to help me see where the table is, remove later -->
+    <table class="table">
       <tr>
-        <td>Lease start</td>
-        <td class="show-col"><%=@apartment.lease_start%></td>
+        <td>Lease duration</td>
+        <td class="show-col"><%=@apartment.lease_start.strftime("%e %B %Y")%> - <%=@apartment.lease_end.strftime("%e %B %Y")%></td>
         <td class="edit-col">
-          <%=@apartment.lease_start%>
-        </td>
-      </tr>
-      <tr>
-        <td>Lease end</td>
-        <td class="show-col"><%=@apartment.lease_end%></td>
-        <td class="edit-col">
-          <%=@apartment.lease_start%>
           <form method="post" action="/landlord/apartment/<%= @apartment.id %>/update_lease" style="display:inline"><!-- MOVE DISPLAY TO CSS -->
             <label for="lease_start">New Lease Start</label>
             <input name="lease_start" type="date" id="lease_start" value="<%=@apartment.lease_start%>">
             <label for="lease_end">New Lease End</label>
             <input name="lease_end" type="date" id="lease_end" value="<%=@apartment.lease_end%>">
-            <button type="submit">Update Lease Dates</button>
+            <button type="submit" class="btn">Update Lease Dates</button>
           </form>
         </td>
       </tr>
@@ -40,11 +32,11 @@
         <td class="edit-col">
           <% @apartment.car_spaces.each do |car_space| %>
             <form method="post" action="/landlord/apartment/<%= @apartment.id %>/unassign_car_space/<%= car_space.id %>" style="display:inline"><!-- TODO: MOVE DISPLAY TO CSS -->
-              <button class="unassign-car-space" id="unassign-car-space-<%= car_space.id %>">Unassign <%=car_space.id.to_s %></button>
+              <button class="btn" id="unassign-car-space-<%= car_space.id %>">Unassign <%=car_space.id.to_s %></button>
             </form>
           <% end%>
           <form method="post" action="/landlord/apartment/<%= @apartment.id %>/assign_car_space" style="display:inline"><!-- MOVE DISPLAY TO CSS -->
-            <select name="new_car_space" id="new_car_space" class="assign-new-car-space">
+            <select name="new_car_space" id="new_car_space">
               <!-- TODO: sort this iterator -->
               <% CarSpace.all.each do |car_space_it| %>
                 <% unless car_space_it.apartment == @apartment %>
@@ -60,7 +52,7 @@
                 <% end %>
               <% end %>
             </select>
-            <button type="submit">Assign new</button>
+            <button type="submit" class="btn">Assign new</button>
           </form>
         </td>
       </tr>
@@ -72,7 +64,7 @@
             <form method="post" action="/landlord/apartment/<%= @apartment.id %>/update_rent" style="display:inline"><!-- MOVE DISPLAY TO CSS -->
               <label for="new_rent">Update Rent</label>
               <input name="new_rent" type="string" id="new_rent">
-              <button type="submit">Submit</button>
+              <button type="submit" class="btn">Submit</button>
             </form>
         </td>
       </tr>
@@ -92,7 +84,7 @@
         <td class="show-col"><%=@apartment.tenant_name%></td>
         <td class="edit-col">
           <%=@apartment.tenant_name%>
-          <button id="show-new-tenant-form-button">New Tenant!</button>
+          <button id="show-new-tenant-form-button" class="btn">New Tenant!</button>
           <form method="post" action="/landlord/apartment/<%= @apartment.id %>/new_tenant" id="show-new-tenant-form">
             <label for="lease_start">Lease Start:</label>
             <input name="lease_start" type="date" id="lease_start" value="<%=@apartment.lease_end%>">
@@ -104,7 +96,7 @@
             <input name="tenant_email" type="email" id="tenant_email">
             <label for="tenant_phone">Tenant Phone:</label>
             <input name="tenant_phone" type="text" id="tenant_phone">
-            <button type="submit">Submit</button>
+            <button type="submit" class="btn">Submit</button>
           </form>
         </td>
       </tr>
@@ -115,7 +107,7 @@
           <td class="edit-col">
             <%=@apartment.upcoming_tenant.name%>
             <form method="post" action="/landlord/apartment/<%= @apartment.id %>/delete_upcoming_tenant" style="display:inline"><!-- MOVE DISPLAY TO CSS -->
-              <button type="submit">Delete</button>
+              <button type="submit" class="btn">Delete</button>
             </form>
           </td>
         </tr>
