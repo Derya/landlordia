@@ -21,7 +21,24 @@ end
 
 get '/landlord/apartment/:id' do
   @apartment = Apartment.find params[:id]
-  erb :'landlord/apartment/show'
+  @mode_edit = false
+  # TODO
+  # if @apartment
+    erb :'landlord/apartment/show'
+  # else
+  #   erb :'landlord/apartment/error'
+  # end
+end
+
+get '/landlord/apartment/:id/edit' do
+  @apartment = Apartment.find params[:id]
+  @mode_edit = true
+  # TODO
+  # if @apartment
+    erb :'landlord/apartment/show'
+  # else
+  #   erb :'landlord/apartment/error'
+  # end
 end
 
 get '/landlord/apartment/edit' do
@@ -81,11 +98,9 @@ post '/landlord/apartment/:id1/unassign_car_space/:id2' do
     else
       session[:flash] = "Parking spot #{car_space.id} not found"
     end
-
-    redirect '/landlord/apartment/' + params[:id1].to_s
+    redirect '/landlord/apartment/' + params[:id1].to_s + '/edit'
   else
     session[:flash] = "couldn't find apartment #{params[:id1]}"
-
     redirect '/landlord'
   end
 end
@@ -108,7 +123,7 @@ post '/landlord/apartment/:id/assign_car_space' do
       session[:flash] = "Parking spot #{car_space.id} not found"
     end
 
-    redirect '/landlord/apartment/' + params[:id].to_s
+    redirect '/landlord/apartment/' + params[:id].to_s + '/edit'
   else
     session[:flash] = "couldn't find apartment #{params[:id]}"
 
@@ -124,7 +139,6 @@ post '/landlord/apartment/:id/new_tenant' do
     apartment_to.lease_start = params[:lease_start]
     apartment_to.lease_end = params[:lease_end]
     if new_ten.validate && apartment_to.validate
-      # TODO this feels dangerous
       new_ten.save
       apartment_to.save
       session[:flash] = "Created new tenant #{params[:tenant_name]}."
@@ -134,15 +148,12 @@ post '/landlord/apartment/:id/new_tenant' do
       session[:flash] = session[:flash] + ", "
       add_errors_to_session(apartment_to.errors)
     end
-
   redirect '/landlord/apartment/' + params[:id].to_s
   else
     session[:flash] = "couldn't find apartment #{params[:id]}"
-
     redirect '/landlord'
   end
 
-  
 end
 
 post '/landlord/apartment/:id/update_rent' do
@@ -152,7 +163,7 @@ post '/landlord/apartment/:id/update_rent' do
 
     # apartment_to.rent = 
 
-    redirect '/landlord/apartment/' + params[:id].to_s
+    redirect '/landlord/apartment/' + params[:id].to_s + '/edit'
   else
     session[:flash] = "couldn't find apartment #{params[:id]}"
 
@@ -164,7 +175,6 @@ end
 post '/landlord/apartment/:id/update_lease' do
   apartment_to = Apartment.find(params[:id])
   if apartment_to
-
     apartment_to.lease_start = params[:lease_start]
     apartment_to.lease_end = params[:lease_end]
     if apartment_to.save
@@ -176,42 +186,32 @@ post '/landlord/apartment/:id/update_lease' do
       end
       session[:flash] = session[:flash].chomp(", ")
     end
-
-    redirect '/landlord/apartment/' + params[:id].to_s
+    redirect '/landlord/apartment/' + params[:id].to_s + '/edit'
   else
     session[:flash] = "couldn't find apartment #{params[:id]}"
-
     redirect '/landlord'
   end
-
 end
 
-
 post '/landlord/apartment/:id/delete_upcoming_tenant' do
-
   apartment_to = Apartment.find(params[:id])
-
   if apartment_to
-
     ten_del = apartment_to.upcoming_tenant
-
     if ten_del && ten_del.destroy
       session[:flash] = "deleted #{ten_del.name if ten_del.name}"
     else
       session[:flash] = "couldn't delete upcoming tenant for apartment #{params[:id]}"
     end
-
     redirect '/landlord/apartment/' + params[:id].to_s
   else
     session[:flash] = "couldn't find apartment #{params[:id]}"
-
     redirect '/landlord'
   end
-
 end
 
 
 post '/landlord/notes/:id' do
+  # TODO: add flashes and conditionals here
   @note = Note.find(params[:id])
   @note.outstanding = false
   @note.save
