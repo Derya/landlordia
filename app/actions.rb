@@ -206,6 +206,8 @@ post '/landlord/apartment/:id/delete_upcoming_tenant' do
 
 end
 
+# fix google action to have flash messages and fix tenant new note action
+
 
 post '/landlord/notes/:id' do
   @note = Note.find(params[:id])
