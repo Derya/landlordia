@@ -3,7 +3,7 @@ $(document).ready(function()
 {
 
   // TODO: MOVE THIS DEFAULTING PROPERTY TO CSS, also the first line should be for edit and not show
-  $('.show-col').toggle();
+  $('.edit-col').toggle();
   $('#show-new-tenant-form').toggle();
 
   $('#allow-editing-switch').click(function()
