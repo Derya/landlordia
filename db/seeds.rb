@@ -92,7 +92,7 @@ NUM_APTS.times do
       rent.amount = @apt_monthly_rent
       rent.month = time
       #TODO: randomize this:
-      rent.pay_status = "paid"
+      rent.pay_status = "Paid"
       rent.apartment = @apt
       rent.tenant = @tenant
       rent.save
@@ -103,7 +103,7 @@ NUM_APTS.times do
         note = Note.new
         #add misc data
         note.content = Faker::Lorem.sentence(10)
-        note.note_type = ["service request","notification"].sample
+        note.note_type = ["Service request","Notification"].sample
         note.outstanding = false
         note.apartment_id = @apt.id
         note.tenant_id = @tenant.id
@@ -114,10 +114,31 @@ NUM_APTS.times do
 
     end
 
+    rentz = @tenant.rents
+    rents_back = rents_to_unpay
+
     # go back and unpay some rents
-    @tenant.rents.last(rents_to_unpay).each do |rent|
-      rent.pay_status = "not paid"
+    rentz.last(rents_back).each do |rent|
+      rent.pay_status = "Not paid"
       rent.save
+    end
+
+    # go mark some rents as late
+    first_ten_rents = rentz.first(10)
+    moddable_rents = []
+    first_ten_rents.each do |rent|
+      moddable_rents << rent unless rent.pay_status == "Not paid"
+    end
+
+    
+    if moddable_rents.length > 0
+      index = rand(moddable_rents.length)
+      #binding.pry
+      while index < moddable_rents.length do
+        moddable_rents[index].pay_status = "Paid #{moddable_rents.length - index} months late"
+        moddable_rents[index].save
+        index += 1
+      end
     end
 
     # go back and make some service requests outstanding
