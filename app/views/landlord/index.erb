@@ -1,16 +1,11 @@
-<div id="alerts">
-  <div class="col-sm-3">
-
-  <%= erb :'_alerts', locals: { mode: "all" } %>
-
+<div class="STUFF">
+  <div id="alerts">
+    <%= erb :'_alerts', locals: { mode: "all" } %>
   </div>
-</div>
 
-<main>
-<% @apartments.each_slice(4) do |group| %>
-  <div class="row">
-    <% group.each do |apt| %>
-      <div class="col-sm-3">
+  <div class="container" id="apartments">
+    <% @apartments.each do |apt| %>
+      <div class="col-xs-12 col-sm-6 col-md-3 floor-plan-holder">
         <a href='landlord/apartment/<%= apt.id%>'><div class="floor-plan">
           <img src="/media/squareF.jpg" alt="">
           <span class="apt-number"><%= apt.apartment_number %></span>
@@ -30,6 +25,4 @@
       </div>
     <% end %>
   </div>
-<% end %>
-</main>
-
+</div>
