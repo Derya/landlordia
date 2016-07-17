@@ -195,3 +195,6 @@ footer p{
   font-family: 'Righteous', cursive;
 }
 
+.floor-plan-holder button:hover{
+  color: crimson;
+}
