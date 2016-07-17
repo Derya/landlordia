@@ -221,6 +221,20 @@ post '/landlord/notes/:id' do
   redirect "/landlord/apartment/#{@apartment.id}/notes"
 end
 
-
-
-
+post '/landlord/apartment/:id/rent_update' do
+  @apartment = Apartment.find(params[:id])
+  if @apartment.overdue?
+    overdue_rent = @apartment.overdue?
+    overdue_rent.pay_status = "Paid"
+    overdue_rent.save
+  else
+    @apartment.rents.create(
+      amount: @apartment.rents.last.amount,
+      month: Date.today.next_month.beginning_of_month,
+      pay_status: "Paid",
+      apartment_id: @apartment.id,
+      tenant_id: @apartment.tenant.id
+      )
+  end
+  redirect "/landlord/apartment/#{params[:id]}"
+end
