@@ -185,7 +185,8 @@ footer p{
   top: 10%;
   position: absolute;
   text-align: center;
-  width: 20%;
+  /*margin-right: 105px;*/
+  width: 25%;
   font-family: 'Righteous', cursive;
   border: solid 1px #1B3957;
   box-shadow: 3px 3px 3px #1B3957;
