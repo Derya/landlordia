@@ -38,7 +38,11 @@ class Apartment < ActiveRecord::Base
   end
 
   def overdue?
-    rents.find_by(pay_status: 'Not paid')
+    if tenant
+      tenant.rents.find_by(pay_status: 'Not paid')
+    else
+      false
+    end
   end
 
   private

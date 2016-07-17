@@ -21,3 +21,7 @@ body {
 .navbar-right a:hover{
     background: transparent;
 }
+
+.footer {
+  display:none;
+}
