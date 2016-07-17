@@ -31,6 +31,7 @@ body{
 .navbar-brand {
   font-family: 'Righteous', cursive;
   font-size: 120%;
+  color: #1B3957;
 }
 
 .navbar-brand a:hover{
@@ -81,36 +82,32 @@ footer p{
   background-color: #fff;
 }
 
+#alerts{
+  border-radius: 15px;
+  width:25%;
+  float:left;
+  max-width:350px;
+  background: #EBF3F3;
+}
+
 #alerts ul{
   list-style-type: none;
 }  
 
 #alerts h1 {
   font-family: 'Righteous', cursive;
-  color: #1B3957
+  color: #A61C16,
 }
 
 .alert {
   margin:auto;
   width: 100%;
   border-radius:20px;
-  background-color:#A61C16;
-}
-
-.alert {
-  color:#1B3957;
 }
 
 #apartments {
   float:right;
   width:75%;
-}
-
-#alerts {
-  width:25%;
-  float:left;
-  max-width:350px;
-  background-color:grey;
 }
 
 .floor-plan {
