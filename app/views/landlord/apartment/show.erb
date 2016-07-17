@@ -81,7 +81,7 @@
       <% end %>
       <tr> <!-- ROW FOR CURRENT TENANT (DISPLAYS WITH "UNOCCUPIED" IF THERE IS NONE) -->
         <td>Current tenant name</td>
-        <td class="show-col"><a href="<%=@apartment.tenant_email%>"><%=@apartment.tenant_name%></a></td>
+        <td class="show-col"><a href="<%=@apartment.tenant_email_mailto%>"><%=@apartment.tenant_name%></a></td>
         <td class="edit-col">
           <%=@apartment.tenant_name%>
           <button id="show-new-tenant-form-button" class="btn">New Tenant!</button>
