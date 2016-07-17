@@ -80,18 +80,17 @@ hr:after {
 
 #alerts h1 {
   font-family: 'Righteous', cursive;
+  color: #1B3957
 }
 
 .alert {
   margin:auto;
-  width: 80%;
+  width: 100%;
   border-radius:20px;
   background-color:pink;
 }
 
 .stuff {
-  margin-left:200px;
-  background-color:green;
 }
 
 #apartments {
