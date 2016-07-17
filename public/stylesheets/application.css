@@ -55,27 +55,6 @@ body{
   line-height: 600%;
 }
 
-/*  hr { 
-  padding: 0;
-  border: none; 
-  border-top: medium double #8c8c8c; 
-  color: #8c8c8c; 
-  text-align: center; 
-} 
-hr:after { 
-  content: "§"; 
-  display: inline-block; 
-  position: relative; 
-  top: -0.7em; 
-  font-size: 1.5em; 
-  padding: 0 0.25em; 
-}*/
-
-.footer{
-  /*height: 100px;*/
-
-}
-
 footer p{
   width: 100%;
   overflow: hidden;
@@ -94,15 +73,25 @@ footer p{
   list-style-type: none;
 }  
 
-#alerts h1 {
+#alerts header {
   font-family: 'Righteous', cursive;
+  color: #A61C16;
+}
+
+#alerts a {
   color: #A61C16,
+  padding: -10px;
 }
 
 .alert {
   margin:auto;
   width: 100%;
-  border-radius:20px;
+}
+
+.custom-padding{
+  padding: 0px !important;
+  margin: 0 auto !important;
+  
 }
 
 #apartments {
@@ -193,5 +182,11 @@ footer p{
 }
 
 .floor-plan-holder button:hover{
-  color: crimson;
+  color: #EBF3F3;
+}
+
+#tenant-form{
+  text-align: center;
+  margin: auto;
+  max-width: 500px;
 }
