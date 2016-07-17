@@ -1,6 +1,7 @@
 .thead  {
   background-color: #2B4A69;
   color: #EBF3F3;
+  font-size: 16px;
 }
 
 .btn {
@@ -13,6 +14,18 @@
 
 .note_content {
   text-align: left
+}
+
+.new_form {
+  text-align: center;
+}
+
+.apartment_number {
+  color:#1B3957;
+}
+
+.drop_down {
+  display: inline;
 }
 
 /*  $lobster: Lobster;
@@ -29,63 +42,3 @@
   min-height:100%;
   background-size:cover;
 }*/
-
-  body{
-    background-size: cover;
-    color: #fff;
-    /*background:rgba(0,0,0,0.4);*/
-    text-align: center;
-  }
-
-  .navbar-brand {
-    font-family: 'Righteous', cursive;
-    font-size: 120%;
-  }
-
-  .branded-letter{
-    font-family: 'Lobster', cursive;
-    font-size: 250%;
-    color: #1B3957;
-  }
-
-  .main-logo {
-    font-family: 'Righteous', cursive;
-    font-size: 600%;
-    text-align: center;
-  }
-
-  .living-together {
-    font-size: 300%;
-    line-height: 600%;
-  }
-
-  hr { 
-    padding: 0;
-    border: none; 
-    border-top: medium double #8c8c8c; 
-    color: #8c8c8c; 
-    text-align: center; 
-  } 
-  hr:after { 
-    content: "§"; 
-    display: inline-block; 
-    position: relative; 
-    top: -0.7em; 
-    font-size: 1.5em; 
-    padding: 0 0.25em; 
-  }
-
-  .footer{
-    height: 20px;
-    clear: all;
-    
-  }  
-
-  #alerts {
-    background: yellow;
-    opacity: 0.5;
-  }
-
-  #alerts h1 {
-    font-family: 'Righteous', cursive;
-  }

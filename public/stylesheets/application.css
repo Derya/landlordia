@@ -21,8 +21,8 @@
   background-size:cover;
 }*/
 
+
 body{
-  background-size: cover;
   color: #fff;
   /*background:rgba(0,0,0,0.4);*/
   text-align: center;
@@ -72,16 +72,10 @@ hr:after {
 
 .footer{
   /*height: 100px;*/
-  clear: all;
-  background-color: #fff;
+
 }
 
 .footer p{
-  padding: 2%;
-  position: fixed;
-  left: 0;
-  margin: 0 auto -155;
-  height: 100px;
   width: 100%;
   overflow: hidden;
   background-color: #fff;
@@ -93,6 +87,29 @@ hr:after {
 
 #alerts h1 {
   font-family: 'Righteous', cursive;
+  color: #1B3957
+}
+
+.alert {
+  margin:auto;
+  width: 100%;
+  border-radius:20px;
+  background-color:pink;
+}
+
+.stuff {
+}
+
+#apartments {
+  float:right;
+  width:75%;
+}
+
+#alerts {
+  width:25%;
+  float:left;
+  max-width:350px;
+  background-color:grey;
 }
 
 .floor-plan {
@@ -159,6 +176,7 @@ hr:after {
   font-family: 'Righteous', cursive;
   font-size: 400%;
 }
+
 .floor-plan .pay-rent {
   background: yellow;
   color: white;

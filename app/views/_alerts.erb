@@ -2,71 +2,44 @@
     <h1>Alerts</h1>
 </header>
 
-<section class="overdue">
-  <header>
-    <h2 class="alerts-title">Overdue rent</h2>
-  </header>
-  <main class="alerts-body">
-    <% if mode == "all" %>
-      <ul class="alerts-list">
-        <% overdues = Apartment.joins(:rents).where(rents: { pay_status: 'Not paid'}) %>
-        <% overdues.uniq.each do |overdue| %>
-          <li><a href="/landlord/apartment/<%= overdue.id%>" ><%= overdue.apartment_number %></a></li>
-        <% end %>
-        <!--populate the list with query on overdue rent -->
-      </ul>
-    <% end %>
-    <% if mode == "apartment" %>
-      <% if @apartment.overdue? %>
-        Yes
-      <% else %>
-        No 
-      <% end %>
-    <% end %>
-  </main>
-</section>
+<% if mode == "all" %>
+  <% overdues = Apartment.joins(:rents).where(rents: { pay_status: 'Not paid'}) %>
+  <% overdues.uniq.each do |overdue| %>
+    <div class="alert"><a href="/landlord/apartment/<%= overdue.id%>" >Rent overdue for apartment <%= overdue.apartment_number %></a></div>
+  <% end %>
+  <!--populate the list with query on overdue rent -->
+<% end %>
+<% if mode == "apartment" %>
+  <% if @apartment.overdue? %>
+    <div class="alert">Rent overdue!</div>
+  <% end %>
+<% end %>
 
-<section class="outstanding">
-  <header>
-    <h2 class="alerts-title">Outstanding notes</h2>
-  </header>
-  <main class="alerts-body">
-    <ul class="alerts-list">
-      <% if mode == "all"%>
-        <% outstanding = Apartment.joins(:notes).where(notes: { outstanding: true}) %>
-        <% outstanding.uniq.each do |outstanding| %>
-          <li><a href="/landlord/apartment/<%= outstanding.id%>/notes" ><%= outstanding.apartment_number %></a> </li>
-        <% end %>
-      <% end %>
-      <% if mode == "apartment" %>
-        <% @apartment.notes.where(outstanding: true).each do |outstanding| %>
-          <li><%=outstanding.note_type%> - <%= outstanding.content %> </li>
-        <% end %>
-      <% end %>
-      <!--populate the list with query on service requests -->
-    </ul>
-  </main>
-</section>
 
-<section class="lease-ending">
-  <header>
-    <h2 class="alerts-title">Lease ending soon</h2>
-  </header>
-  <main class="alerts-body">
-    <% if mode == "all" %>
-      <ul class="alerts-list">
-      <% Apartment.lease_ending.each do |apartment|%>
-        <li><a href="/landlord/apartment/<%= apartment.id%>" ><%=apartment.apartment_number%></a></li>
-      <% end %>
-    <% end %>
-        <!--populate the list with query on lease ending soon -->
-      </ul>
-      <% if mode == "apartment" %>
-        <% if @apartment.lease_ending? %>
-          Yes
-        <% else %>
-          No
-        <% end %>
-      <% end %>  
-  </main>
-</section>
+
+
+<% if mode == "all"%>
+  <% outstanding = Apartment.joins(:notes).where(notes: { outstanding: true}) %>
+  <% outstanding.uniq.each do |outstanding| %>
+    <div class="alert"><a href="/landlord/apartment/<%= outstanding.id%>/notes" >New note from apartment <%= outstanding.apartment_number %></a> </div>
+  <% end %>
+<% end %>
+<% if mode == "apartment" %>
+  <% @apartment.notes.where(outstanding: true).each do |outstanding| %>
+    <div class="alert">New <%=outstanding.note_type%> - <%= outstanding.content %> </div>
+  <% end %>
+<% end %>
+<!--populate the list with query on service requests -->
+
+
+<% if mode == "all" %>
+  <% Apartment.lease_ending.each do |apartment|%>
+    <div class="alert"><a href="/landlord/apartment/<%= apartment.id%>" >Lease ending soon for <%=apartment.apartment_number%></a></div>
+  <% end %>
+<% end %>
+  <!--populate the list with query on lease ending soon -->
+<% if mode == "apartment" %>
+  <% if @apartment.lease_ending? %>
+    <div class="alert">Lease ending soon!</div>
+  <% end %>
+<% end %>  

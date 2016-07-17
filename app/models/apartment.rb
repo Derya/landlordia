@@ -22,7 +22,7 @@ class Apartment < ActiveRecord::Base
   end
 
   def upcoming_tenant
-    self.tenants.find_by(active: "Upcoming")
+    self.tenants.find_by(active: "Coming up")
   end
 
   def lease_ending?
