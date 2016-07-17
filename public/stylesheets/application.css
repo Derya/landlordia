@@ -116,6 +116,10 @@ footer p{
 .floor-plan {
   overflow: hidden;
   position: relative;
+  border-radius:20px;
+  margin-bottom:20px;
+  border: 4px solid #b3b3b3;
+  border-style: inset;
 }
 .floor-plan img {
   width: 100%;

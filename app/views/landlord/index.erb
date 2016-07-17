@@ -9,9 +9,9 @@
     <% @apartments.each do |apt| %>
       <div class="col-xs-12 col-sm-6 col-md-3 floor-plan-holder">
       <span class="pay-rent">
-            <form method="post" action="/landlord/apartment/<%=apt.id %>/rent_update" style="display:inline">
-              <button class="btn"> Pay </button>
-            </form>
+        <form method="post" action="/landlord/apartment/<%=apt.id %>/rent_update" style="display:inline">
+          <button class="btn"> Pay </button>
+        </form>
         <a href='landlord/apartment/<%= apt.id%>'><div class="floor-plan">
           <img src="/media/squareF.jpg" alt="">
           <span class="apt-number"><%= apt.apartment_number %></span>
