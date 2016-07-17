@@ -16,6 +16,13 @@ class Apartment < ActiveRecord::Base
       "unoccupied"
     end
   end
+  def tenant_email_mailto
+    if self.tenant
+      "mailto:self.tenant.email"
+    else
+      "#"
+    end
+  end
 
   def tenant
     self.tenants.find_by(active: "Active")

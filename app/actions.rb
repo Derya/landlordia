@@ -236,5 +236,5 @@ post '/landlord/apartment/:id/rent_update' do
       tenant_id: @apartment.tenant.id
       )
   end
-  redirect "/landlord/apartment/#{params[:id]}"
+  redirect "/landlord"
 end
