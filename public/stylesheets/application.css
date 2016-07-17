@@ -75,14 +75,6 @@ hr:after {
 
 }
 
-
-.alert {
-  margin:auto;
-  width: 100%;
-  border-radius:20px;
-  background-color:pink;
-}
-
 footer p{
   width: 100%;
   overflow: hidden;
@@ -102,7 +94,11 @@ footer p{
   margin:auto;
   width: 100%;
   border-radius:20px;
-  background-color:pink;
+  background-color:#A61C16;
+}
+
+.alert {
+  color:#1B3957;
 }
 
 #apartments {
