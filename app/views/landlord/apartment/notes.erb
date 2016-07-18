@@ -34,7 +34,9 @@
         <td><% unless note.outstanding %>
          <%= note.updated_at.strftime("%e %B %Y") %></td>
          <% end %>
-        <td><a href="mailto:<%=note.tenant.email%>"><%= note.tenant.name %></a></td>
+        <td><% if note.tenant %>
+            <a href="mailto:<%=note.tenant.email%>"><%= note.tenant.name %></a>
+            <% end %> </td>
       </tr>
       <%end%>
     </tbody>
