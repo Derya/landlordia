@@ -18,7 +18,7 @@ class Apartment < ActiveRecord::Base
   end
   def tenant_email_mailto
     if self.tenant
-      "mailto:self.tenant.email"
+      "mailto:#{self.tenant.email}"
     else
       "#"
     end

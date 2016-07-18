@@ -3,7 +3,7 @@
 </header>
 
 <% if mode == "all" %>
-
+  <h3>Overdue</h3>
   <% overdues = Apartment.joins("INNER JOIN tenants ON apartments.id = tenants.apartment_id").joins("INNER JOIN rents ON tenants.id = rents.tenant_id").where("tenants.active='Active' AND rents.pay_status='Not paid'").group("apartments.id") %>
   <% overdues.each do |overdue| %>
 
@@ -13,7 +13,7 @@
 <% end %>
 <% if mode == "apartment" %>
   <% if @apartment.overdue? %>
-    <div class="alert">Rent overdue!</div>
+    <div class="alert custom-padding">Rent overdue!</div>
   <% end %>
 <% end %>
 
@@ -21,6 +21,7 @@
 
 
 <% if mode == "all"%>
+  <h3>Outstanding</h3>
   <% outstanding = Apartment.joins(:notes).where(notes: { outstanding: true}) %>
   <% outstanding.uniq.each do |outstanding| %>
     <a href="/landlord/apartment/<%= outstanding.id%>/notes" ><div class="alert">New note from apartment <%= outstanding.apartment_number %> </div></a>
@@ -35,6 +36,7 @@
 
 
 <% if mode == "all" %>
+  <h3>Lease ending</h3>
   <% Apartment.lease_ending.each do |apartment|%>
     <a href="/landlord/apartment/<%= apartment.id%>" ><div class="alert">Lease ending soon for <%=apartment.apartment_number%></div></a>
   <% end %>

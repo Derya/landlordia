@@ -55,27 +55,6 @@ body{
   line-height: 600%;
 }
 
-/*  hr { 
-  padding: 0;
-  border: none; 
-  border-top: medium double #8c8c8c; 
-  color: #8c8c8c; 
-  text-align: center; 
-} 
-hr:after { 
-  content: "§"; 
-  display: inline-block; 
-  position: relative; 
-  top: -0.7em; 
-  font-size: 1.5em; 
-  padding: 0 0.25em; 
-}*/
-
-.footer{
-  /*height: 100px;*/
-
-}
-
 footer p{
   width: 100%;
   overflow: hidden;
@@ -88,26 +67,44 @@ footer p{
   float:left;
   max-width:350px;
   background: #EBF3F3;
+  border: 4px solid #b3b3b3;
+  border-style: inset;
+  margin-left: 30px;
+}
+
+#alerts h3{
+  color: #2B4A69;
 }
 
 #alerts ul{
   list-style-type: none;
 }  
 
-#alerts h1 {
+#alerts header {
   font-family: 'Righteous', cursive;
+  color: #A61C16;
+}
+
+#alerts a {
   color: #A61C16,
+  padding: -10px;
 }
 
 .alert {
   margin:auto;
   width: 100%;
-  border-radius:20px;
+  padding: 0px;
 }
+
+/*.custom-padding{
+  padding: 0px !important;
+  margin: 0 auto !important;
+  
+}*/
 
 #apartments {
   float:right;
-  width:75%;
+  width:70%;
 }
 
 .floor-plan {
@@ -188,10 +185,19 @@ footer p{
   top: 10%;
   position: absolute;
   text-align: center;
-  width: 20%;
+  /*margin-right: 105px;*/
+  width: 25%;
   font-family: 'Righteous', cursive;
+  border: solid 1px #1B3957;
+  box-shadow: 3px 3px 3px #1B3957;
 }
 
 .floor-plan-holder button:hover{
-  color: crimson;
+  color: #EBF3F3;
+}
+
+#tenant-form{
+  text-align: center;
+  margin: auto;
+  max-width: 500px;
 }
