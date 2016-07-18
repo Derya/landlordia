@@ -23,10 +23,12 @@
             <span class="outstanding"><img src="/media/warning.gif"></span>
           <% end %>
           <% if apt.overdue? %>
-            <span class="overdue">overdue</span>
+            <span class="overdue"></span>
+          <% elsif apt.paid_upcoming? %>
+            <span class="paid_upcoming"></span>
           <% end %>
           <% unless apt.tenant %>
-            <span class="unoccupied">unoccupied</span>
+            <span class="unoccupied"></span>
           <% end %>
         </div></a>
       </div>

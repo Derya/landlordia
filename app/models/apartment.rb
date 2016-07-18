@@ -32,6 +32,19 @@ class Apartment < ActiveRecord::Base
     self.tenants.find_by(active: "Coming up")
   end
 
+  def paid_upcoming?
+    if tenant
+      last_rent = tenant.rents.last
+      if last_rent
+        last_rent.month > Date.today
+      else
+        false
+      end
+    else
+      false
+    end
+  end
+
   def lease_ending?
     lease_end.between?(Date.today, MONTHS_NOTICE.months.since)
   end

@@ -141,6 +141,7 @@ footer p{
   top: 15%;
   transform: rotate(-45deg);
   width: 100%;
+  z-index:1;
 }
 
 .floor-plan .unoccupied {
@@ -167,6 +168,18 @@ footer p{
   height: 100%;
 }
 
+.floor-plan .paid_upcoming {
+  opacity: 0.4;
+  background: #99ffcc;
+  color: #99ffcc;
+  left: 0%;
+  position: absolute;
+  text-align: center;
+  top: 0%;
+  width: 100%;
+  height: 100%;
+}
+
 .floor-plan .outstanding img{
   position: absolute; 
   top: 25px; 
@@ -174,6 +187,7 @@ footer p{
   height: 85%;
   width: 85%;
   opacity: 1;
+  z-index: 2;
 }
 
 .floor-plan .apt-number {
@@ -189,7 +203,7 @@ footer p{
 }
 
 .floor-plan-holder button{
-  z-index: 1;
+  z-index: 3;
   background: #C1C9C9;
   opacity: 1;
   color: #000;
