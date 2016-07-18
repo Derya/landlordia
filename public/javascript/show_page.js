@@ -8,10 +8,20 @@ $(document).ready(function()
   
   $('#show-new-tenant-form').toggle();
 
+  var oldEditButtonText = $('#allow-editing-switch').html();
+  var NEW_EDIT_BUTTON_TEXT = "Finished Editing";
   $('#allow-editing-switch').click(function()
   {
     $('.edit-col').toggle();
     $('.show-col').toggle();
+    if ($('#allow-editing-switch').html() == oldEditButtonText)
+    {
+      $('#allow-editing-switch').html(NEW_EDIT_BUTTON_TEXT);
+    }
+    else
+    {
+      $('#allow-editing-switch').html(oldEditButtonText);
+    }
   });
 
   var newTenButtonText = $('#show-new-tenant-form-button').html();
