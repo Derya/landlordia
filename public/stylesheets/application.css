@@ -227,3 +227,7 @@ footer p{
   margin: auto;
   max-width: 500px;
 }
+
+#allow-editing-switch{
+  margin-bottom:20px;
+}
