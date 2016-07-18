@@ -26,6 +26,13 @@ body{
   color: #000;
   /*background:rgba(0,0,0,0.4);*/
   text-align: center;
+  padding-left:40px;
+  padding-right:40px;
+}
+
+.navbar {
+  margin-left:-40px;
+  margin-right:-40px;
 }
 
 .navbar-brand {
@@ -63,7 +70,7 @@ footer p{
 
 #alerts{
   border-radius: 15px;
-  width:25%;
+  width:20%;
   float:left;
   max-width:350px;
   background: #EBF3F3;
@@ -88,6 +95,11 @@ footer p{
 #alerts a {
   color: #A61C16,
   padding: -10px;
+  text-decoration:none;
+}
+
+#alerts a:hover {
+  font-weight:bold;
 }
 
 .alert {
@@ -104,7 +116,7 @@ footer p{
 
 #apartments {
   float:right;
-  width:70%;
+  width:75%;
 }
 
 .floor-plan {
