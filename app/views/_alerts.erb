@@ -24,7 +24,7 @@
   <h3>Outstanding</h3>
   <% outstanding = Apartment.joins(:notes).where(notes: { outstanding: true}) %>
   <% outstanding.uniq.each do |outstanding| %>
-    <a href="/landlord/apartment/<%= outstanding.id%>/notes" ><div class="alert">New note from apartment <%= outstanding.apartment_number %> </div></a>
+    <a href="/landlord/apartment/<%= outstanding.id%>/notes" ><div class="alert">Outstanding note from apartment <%= outstanding.apartment_number %> </div></a>
   <% end %>
 <% end %>
 <% if mode == "apartment" %>
