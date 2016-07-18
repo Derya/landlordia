@@ -73,7 +73,13 @@
           <td>Rent status</td>
           <% this_rent = tenant.rents.last %>
           <% if this_rent %>
-            <td><%= this_rent.pay_status %></td>
+            <% if this_rent.pay_status == "Paid" %>
+              <td><%= this_rent.pay_status %></td>
+            <% elsif this_rent.pay_status == "Not Paid" %>
+              <td><%= this_rent.pay_status %></td>
+            <% else %>
+              <td><%= this_rent.pay_status %></td>
+            <% end %>
           <% else %>
             <td>No rent payments yet.</td>
           <% end %>
