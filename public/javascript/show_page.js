@@ -15,7 +15,7 @@ $(document).ready(function()
     $('.edit-col').toggle();
     $('.show-col').toggle();
     if ($('#allow-editing-switch').html() == oldEditButtonText)
-    {
+    { 
       $('#allow-editing-switch').html(NEW_EDIT_BUTTON_TEXT);
     }
     else
