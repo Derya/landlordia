@@ -232,3 +232,14 @@ footer p{
 #allow-editing-switch{
   margin-bottom:20px;
 }
+
+/* class to disable text select, and kill the text selecting cursor */
+.noTextSelect {
+  cursor:default;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
