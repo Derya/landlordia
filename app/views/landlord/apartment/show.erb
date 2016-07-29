@@ -4,7 +4,6 @@
 <main class="description">
   <div class="description-container">
     <header>
-      <!-- i put in this temporary inline styling, remove it later, you probably want to apply display:inline in the css however -->
       <h1 class="apartment_number">Apartment <%=@apartment.apartment_number%></h1>
       <button class="btn" id="allow-editing-switch">Edit</button>
     </header>
@@ -123,15 +122,15 @@
       <% end %>
       <tr>
         <td>Notes and service requests</td>
-        <td><a href='/landlord/apartment/<%= @apartment.id %>/notes'>See all notes</a></td>
+        <td><a href='/landlord/apartment/<%= @apartment.apartment_number %>/notes'>See all notes</a></td>
       </tr>
       <tr>
         <td>Tenant history</td>
-        <td><a href='/landlord/apartment/<%= @apartment.id %>/tenants'>See all tenants</a></td>
+        <td><a href='/landlord/apartment/<%= @apartment.apartment_number %>/tenants'>See all tenants</a></td>
       </tr>
       <tr>
         <td>Rent payments</td>
-        <td><a href='/landlord/apartment/<%= @apartment.id %>/rents'>See all rents</a></td>
+        <td><a href='/landlord/apartment/<%= @apartment.apartment_number %>/rents'>See all rents</a></td>
       </tr>
     </table>
   </div>

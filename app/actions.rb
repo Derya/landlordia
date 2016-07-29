@@ -20,7 +20,7 @@ get '/landlord' do
 end
 
 get '/landlord/apartment/:id' do
-  @apartment = Apartment.find params[:id]
+  @apartment = Apartment.find_by apartment_number: params[:id]
   @mode_edit = false
   # TODO
   # if @apartment
@@ -46,19 +46,19 @@ get '/landlord/apartment/edit' do
 end
 
 get '/landlord/apartment/:id/notes' do
-  @apartment = Apartment.find(params[:id])
+  @apartment = Apartment.find_by(apartment_number: params[:id])
   @notes = @apartment.notes
   erb :'landlord/apartment/notes'
 end
 
 get '/landlord/apartment/:id/tenants' do
-  @apartment = Apartment.find(params[:id])
+  @apartment = Apartment.find_by(apartment_number: params[:id])
   @tenants = @apartment.tenants
   erb :'landlord/apartment/tenants'
 end
 
 get '/landlord/apartment/:id/rents' do
-  @apartment = Apartment.find(params[:id])
+  @apartment = Apartment.find_by(apartment_number: params[:id])
   @rents = @apartment.rents
   erb :'landlord/apartment/rents'
 end
